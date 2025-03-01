@@ -1,0 +1,82 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-05 14:37+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\main_project\settings.py:40
+msgid "English"
+msgstr ""
+
+#: .\main_project\settings.py:41
+msgid "Azerbaijani"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:38
+msgid "Welcome to PDF Quiz Maker!"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:39
+msgid "Turn your PDFs into interactive quizzes with just a few clicks. "
+msgstr ""
+
+#: .\templates\pdfapp\home.html:43
+msgid "Create New Quiz"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:47
+msgid "Usage of Quiz Maker"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:55
+msgid "Step 1"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:56
+msgid "Highlight correct answers in your pdf"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:65
+msgid "Step 2"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:66
+msgid "Upload your PDF with highlighted text"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:75
+msgid "Step 3"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:76
+msgid "Review and edit your quiz"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:85
+msgid "Step 4"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:86
+msgid "Generate and solve your quiz"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:94
+msgid "Need Help? Reach out to us at"
+msgstr ""
+
+#: .\templates\pdfapp\home.html:94
+msgid "Contact Page"
+msgstr ""

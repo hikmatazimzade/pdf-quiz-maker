@@ -1,0 +1,22 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block page_title %}Buy me a coffee{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static "css/buy_me_coffee.css" %}">
+{% endblock css_files %}
+
+
+{% block content %}
+{% include "partials/messages.html" %}
+{% include "partials/navbar.html" %}
+
+
+
+
+<div class="mb-5"></div>
+{% include "partials/_footer.html" %}
+{% endblock content %}

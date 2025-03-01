@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'home' %}">Pdf Quiz Maker</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'home' %}">{% trans "Home" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'quiz_choice' %}">Quiz</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'about' %}">{% trans "About" %}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">{% trans "Contact" %}</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img
+                            class="img-profile rounded-circle"
+                            src="{% if user.profile_model.avatar %}{{ user.profile_model.avatar.url }}{% else %}{% static 'img/empty_profile.png' %}{% endif %}"
+                            alt="Profile Picture"
+                        />
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'profile' %}">{% trans "View Profile" %}</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">{% trans "Logout" %}</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="nav-link login-button">{% trans "Login/Register" %}</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

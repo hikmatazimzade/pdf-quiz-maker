@@ -1,0 +1,90 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block page_title %}{% trans "Login" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/authentification.css' %}">
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_error.css' %}">
+<link rel="stylesheet" href="{% static 'css/show_password.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+{% endblock %}
+
+{% block content %}
+{% include "partials/messages.html" %}
+<section class="vh gradient-custom">
+    <div class="container py-4 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+
+              <form method="POST">
+                {% csrf_token %}
+                <div class="mb-md-5 mt-md-4 pb-1">
+    
+                  <h2 class="fw-bold mb-2 text-uppercase">{% trans "Login" %}</h2>
+                  <p class="text-white-50 mb-5">{% trans "Please enter your email and password!" %}</p>
+      
+                  <div class="form-outline form-white mb-4">
+                    {{ form.email }}
+                    <label class="form-label" for="typeEmailX"></label>
+                  </div>
+      
+                  <div class="form-outline form-white mb-4">
+                    {% if form.password.errors %}
+                    <div  class="form-error">{{ form.password.errors.0 }}</div>
+                    {% endif %}
+                    <div class="input-group">
+                        {{ form.password }}
+                        <span class="input-group-text">
+                            <i class="bi bi-eye-slash" id="togglePassword"></i>
+                        </span>
+                    </div>
+                    <label class="form-label" for="typePasswordX"></label>
+                  </div>
+                
+      
+                  <div class="form-check d-flex align-items-center justify-content-center mb-4"> <!-- Use flexbox utilities for alignment -->
+                    {{ form.remember_me }}
+                    <label class="form-check-label ms-2" for="rememberMe"> <!-- Use ms-2 for a small margin start -->
+                      {{ form.remember_me.label }}
+                    </label>
+                  </div>
+      
+                  <p class="small mb-4 pb-lg-3"><a class="text-white-50" href="{% url 'input_email' %}">{% trans "Forgot password?" %}</a></p>
+      
+                  <button class="btn btn-outline-light btn-lg px-5 btn-mobile-spacing" type="submit">{% trans "Login" %}</button>
+      
+                </div>
+      
+                <div class="mb-mobile-large">
+                  <p class="mb-0">{% trans "Don't have an account?" %} <a href="{% url 'register' %}" class="text-white-50 fw-bold">{% trans "Sign Up" %}</a>
+                  </p>
+                </div>
+
+              </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#typePasswordX");
+
+    togglePassword.addEventListener("click", function () {
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        
+        this.classList.toggle("bi-eye");
+    });
+
+</script>
+
+{% endblock content %}

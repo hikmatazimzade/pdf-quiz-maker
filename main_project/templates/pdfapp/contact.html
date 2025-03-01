@@ -1,0 +1,65 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block page_title %}{%trans "Contact" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_error.css' %}">
+{% endblock css_files %}
+
+
+{% block content %}
+{% include "partials/messages.html" %}
+{% include "partials/navbar.html" %}
+
+
+<div class="container">
+    <div class="contact-form">
+        <h2>{% trans "Contact us" %}</h2>
+        <center>
+        <p>{% trans "Do you have any questions? Please do not hesitate to contact us directly." %}</p>
+        </center>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">{% trans "Your name" %}</label>
+                {{ form.name }}
+            </div>
+            <script>
+                window.onload = function() {
+                    document.getElementById("name").reset();
+                };
+            </script>
+            <div class="form-group">
+                <label for="email">{% trans "Your email" %}</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="subject">{% trans "Subject" %}</label>
+                {% if form.subject.errors %}
+                <div  class="form-error">{{ form.subject.errors.0 }}</div>
+                {% endif %}
+                {{ form.subject }}
+            </div>
+            <div class="form-group">
+                <label for="message">{% trans "Your message" %}</label>
+                {% if form.message.errors %}
+                <div  class="form-error">{{ form.message.errors.0 }}</div>
+                {% endif %}
+                {{ form.message }}
+            </div>
+            <div class="form-group">
+                <button type="submit">{% trans "SEND" %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="mb-5"></div>
+{% include 'partials/_footer.html' %}
+
+{% endblock content %}

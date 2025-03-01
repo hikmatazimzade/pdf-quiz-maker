@@ -1,0 +1,47 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/quiz.css" %}">
+    <script type="text/javascript" src="{% url 'javascript-catalog' %}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/startup.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="app">
+    <div id="timer">00:00:00</div>
+    <div class="quiz">
+        <h2 id="question">Question</h2>
+        <div id="answer-buttons">
+            <button class="ans">Answer 1</button>
+            <button class="ans">Answer 2</button>
+            <button class="ans">Answer 3</button>
+            <button class="ans">Answer 4</button>
+        </div>
+        <button id="next-question">{% trans "Next" %}</button>
+        <a href="{% url 'quiz_choice' %}">
+            <button id="back-to-quiz">{% trans "Back to Quiz Choice Page" %}</button>
+        </a>
+
+    </div>  
+</div>
+
+<script type="text/javascript">
+    const quizDataFromServer = {{ quiz_data | safe }};
+    const showNumber = {{ show_number|lower  }};
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === " ") {
+            const nextButton = document.getElementById("next-question");
+            if (nextButton.style.display !== "none") {
+                nextButton.click();
+            }
+        }
+    });
+</script>
+<script src="{% static 'js/quiz.js' %}"></script>
+
+</body>
+</html>

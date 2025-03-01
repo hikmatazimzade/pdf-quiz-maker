@@ -1,0 +1,56 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %} 
+{% block page_title %}{%trans "About" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+{% endblock css_files %}
+
+
+{% block content %}
+{% include "partials/messages.html" %}
+{% include "partials/navbar.html" %}
+
+
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-center mb-4">{% trans "About PDF Quiz Maker" %}</h2>
+        <div class="row">
+          <div class="col-lg-6">
+            <p class="about-text">
+              {% trans "PDF Quiz Maker is an innovative tool designed to streamline the process of creating quizzes from PDF documents. Our platform allows educators, students, and professionals to automatically generate quiz questions based on highlighted text within a PDF. This simplifies the quiz creation process, saving time and ensuring that key concepts are captured effectively." %}
+            </p>
+            <p class="about-text">
+              {% trans "With our user-friendly interface, creating a quiz is as easy as uploading your PDF and selecting the text to include. Our system handles the rest, giving you a ready-to-use quiz that can be shared, printed, or integrated into learning management systems." %}"
+            </p>
+            <p class="about-text">
+              {% trans "At PDF Quiz Maker, we are committed to providing a valuable resource for educational technology and e-learning communities. We continuously improve our service based on user feedback and the latest educational trends. Join us in revolutionizing the way quizzes are created and utilized for education and training!" %}
+            </p>
+            <div class="about-features">
+                <h4>{% trans "Features:" %}</h2>
+                <ul>
+                    <li>{% trans "Automatic quiz generation from highlighted text" %}</li>
+                    <li>{% trans "User-friendly interface for seamless quiz creation" %}</li>
+                    <li>{% trans "Support for multiple question types" %}</li>
+                    <li>{% trans "Integration capabilities with popular learning platforms" %}</li>
+                    <li>{% trans "Customizable quiz options to fit educational needs" %}</li>
+                </ul>
+                </div>
+          </div>
+          <div class="col-lg-6">
+            <img src="{% static 'img/logo.webp' %}" alt="Team Meeting" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+<div class="mb-5"></div>
+{% include 'partials/_footer.html' %}
+
+{% endblock content %}

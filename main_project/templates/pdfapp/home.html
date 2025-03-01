@@ -1,0 +1,120 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block page_title %}{%trans "Home" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+{% endblock css_files %}
+
+
+{% block content %}
+{% include "partials/messages.html" %}
+{% include "partials/navbar.html" %}
+
+
+<form action="{% url 'set_language' %}" method="post">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.path }}">
+    <div class="language-dropdown">
+        <select id="languageSelect" name="language" onchange="this.form.submit()">
+            {% get_current_language as CURRENT_LANGUAGE %}
+            {% get_available_languages as LANGUAGES %}
+            {% for lang_code, lang_name in LANGUAGES %}
+                <option value="{{ lang_code }}" {% if lang_code == CURRENT_LANGUAGE %} selected {% endif %}>
+                    {{ lang_name|capfirst }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+</form>
+
+<div class="d-lg-none position-relative">
+    <div class="text-right" style="position: absolute; top: 0; right: 0; padding: 15px;">
+        <a href="https://www.buymeacoffee.com/hikmet_ezimzade" class="mobile_coffee" target="_blank">
+            <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 40px; width: auto;">
+        </a>
+    </div>
+</div>
+
+
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-12 text-center text-lg-right">
+          <a href="https://www.buymeacoffee.com/hikmet_ezimzade" class="d-none d-lg-inline-block coffee-button float-right mt-2 mr-2" target="_blank">
+            <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px; width: 217px;">
+          </a>
+        </div>
+    </div>
+
+  <div class="jumbotron text-center">
+    <h1>{% trans "Welcome to PDF Quiz Maker!" %}</h1>
+      <p>{% trans "Turn your PDFs into interactive quizzes with just a few clicks"%}</p>
+  </div>
+
+    <div class="text-center my-4 mb-5">
+        <a href="{% url 'create_quiz' %}" class="btn-custom">{% trans "Create New Quiz" %}</a>
+    </div>
+
+    <div class="text-center my-4 mb-5 usage_class">
+        <h1>{% trans "Usage of Pdf Quiz Maker" %}</h1>
+    </div>
+
+  <div class="row">
+      <div class="col-md-6 step-card" data-aos="fade-up" data-aos-delay="250">
+          <div class="card">
+              <img src="{% static 'img/highlight_image.png' %}" class="card-img-top" alt="Step 1">
+              <div class="card-body">
+                  <h4 class="card-title">{% trans "Step 1" %}</h4>
+                  <p class="card-text">{% trans "Highlight correct answers in your pdf" %}</p>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-6 step-card" data-aos="fade-up" data-aos-delay="250">
+          <div class="card">
+              <img src="{% static 'img/create_image.png' %}" class="card-img-top" alt="Step 2">
+              <div class="card-body">
+                  <h4 class="card-title">{% trans "Step 2" %}</h4>
+                  <p class="card-text">{% trans "Upload your PDF with highlighted text" %}</p>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-6 step-card" data-aos="fade-up" data-aos-delay="150">
+          <div class="card">
+              <img src="{% static 'img/edit_photo.png' %}" class="card-img-top" alt="Step 3">
+              <div class="card-body">
+                  <h4 class="card-title">{% trans "Step 3" %}</h4>
+                  <p class="card-text">{% trans "Review and edit your quiz" %}</p>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-6 step-card" data-aos="fade-up" data-aos-delay="200">
+          <div class="card">
+              <img src="{% static 'img/quiz_image.png' %}" class="card-img-top" alt="Step 4">
+              <div class="card-body">
+                  <h4 class="card-title">{% trans "Step 4" %}</h4>
+                  <p class="card-text">{% trans "Generate and solve your quiz" %}</p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="mb-5"></div>
+{% include "partials/_footer.html" %}
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+    AOS.init({
+        once: true
+    });
+</script>
+
+{% endblock content %}

@@ -1,0 +1,112 @@
+*{
+  font-family: Arial;
+}
+.navbar-custom {
+    background: #000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.navbar-brand {
+    font-size: 1.8rem;
+    color: white;
+    transition: color 0.3s ease-in-out;
+}
+.navbar-brand:hover, .navbar-brand:focus {
+    color: #ddd;
+    text-decoration: none;
+}
+.nav-item .nav-link {
+    font-size: 1.2rem;
+    color: white;
+    margin-right: 1rem;
+}
+
+.nav-item.dropdown {
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.nav-link.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    padding: 0;
+}
+
+.dropdown-menu {
+    background-color: #333;
+    border: none;
+}
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #ffffff;
+    background-color: #555;
+}
+
+.img-profile {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.nav-link.login-button {
+    background-color: #1fdfa4;
+    color: #000000;
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    transition: background-color .2s ease-in-out;
+}
+  
+.nav-link.login-button:hover,
+.nav-link.login-button:focus {
+    background-color: #17a88b;
+    color: #000000;
+    text-decoration: none;
+}
+
+@media (max-width: 992px) {
+    .navbar-toggler {
+        margin-right: 0;
+        border: none;
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+    .navbar-collapse {
+        text-align: center;
+    }
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .navbar-nav .nav-item {
+        width: 100%;
+    }
+    .nav-item.dropdown {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-link.dropdown-toggle {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .img-profile {
+        display: block;
+        margin: 0 auto;
+    }
+    .navbar-toggler {
+        background-color: white;
+    }
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* SVG with black stroke */
+    }
+
+}

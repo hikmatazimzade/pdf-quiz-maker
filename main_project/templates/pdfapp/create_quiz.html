@@ -1,0 +1,179 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block page_title %}{%trans "Create Quiz" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_error.css' %}">
+<link rel="stylesheet" href="{% static 'css/create_quiz.css' %}">
+<link rel="stylesheet" href="{% static 'css/toggle.css' %}">
+<link rel="stylesheet" href="{% static "css/range.css" %}">
+{% endblock css_files %}
+
+{% block content %}
+{% include "partials/messages.html" %}
+{% include "partials/navbar.html" %}
+
+<div class="form-container">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="pdfInput">PDF</label>
+        {{ form.pdf }}
+      </div>
+
+      {% if form.quiz_name.errors %}
+      <div  class="form-error">{{ form.quiz_name.errors.0 }}</div>
+      {% endif %}
+      <div class="form-group">
+        <label for="testNumber">{% trans "Quiz Name" %}</label>
+        {{ form.quiz_name }}
+      </div>
+
+      <div class="form-group">
+        <label for="testNumber">{% trans "Quiz Question Number" %}</label>
+        {{ form.test_number }}
+      </div>
+
+      <div class="form-group add_margin">
+        {% trans "Quiz Question Range" %}
+        <div class="mb-3"></div>
+        <div slider id="slider-distance">
+            <div>
+                <div inverse-left id="inverse-left"></div>
+                <div inverse-right id="inverse-right"></div>
+                <div range id="range"></div>
+                <span thumb id="thumb1"></span>
+                <span thumb id="thumb2"></span>
+                <div sign id="sign1">
+                    <span id="value1">1</span>
+                </div>
+                <div sign id="sign2">
+                    <span id="value2">{{ max_test_number }}</span>
+                </div>
+            </div>
+            
+            <input name="slider1" type="range" id="slider1" tabindex="0" value="1" min="1" max="500" step="1" />
+            <input name="slider2" type="range" id="slider2" tabindex="0" value="500" min="2" max="500" step="1" />
+        </div>
+      </div>
+      
+
+      <div class="form-group">
+        <label for="variantNumber">{% trans "Variant Number" %}</label>
+        {{ form.variant_number }}
+      </div>
+
+
+      <div class="row">
+        <div class="form-group">
+          <div class="nowrap_class">
+            {% trans "Show Question Number" %}
+          </div>
+          <div class="mb-3"></div>
+          <label class="switch mb-3">
+            {{ form.show_number }}
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <div class="nowrap_class">
+            {% trans "Shuffle Variants" %}
+          </div>
+          
+          <div class="mb-3"></div>
+          <label class="switch mb-3">
+            {{ form.shuffle_variant }}
+            <span class="slider round"></span>
+          </label>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <button class="quiz_class" type="submit">{% trans "Create Quiz" %}</button>
+      </div>
+    </form>
+</div>
+
+<div class="guide_class">
+  <a href="{% url 'user_guide' %}">{% trans "User Guide" %}</a>
+</div>
+
+
+<script>
+  function updateSliderTrack() {
+    const fromValue = parseInt(document.getElementById('fromSlider').value, 10);
+    const toValue = parseInt(document.getElementById('toSlider').value, 10);
+  
+    const percentageFrom = (fromValue / parseInt(document.getElementById('fromSlider').max)) * 100;
+    const percentageTo = (toValue / parseInt(document.getElementById('toSlider').max)) * 100;
+  
+    const filledTrack = document.querySelector('.filled-track');
+    filledTrack.style.left = `${percentageFrom}%`;
+    filledTrack.style.width = `${percentageTo - percentageFrom}%`;
+}
+
+const fromSlider = document.getElementById('fromSlider');
+const toSlider = document.getElementById('toSlider');
+
+fromSlider.addEventListener('input', updateSliderTrack);
+toSlider.addEventListener('input', updateSliderTrack);
+
+// Initialize the track position
+updateSliderTrack();
+
+</script>
+
+
+<script>
+  const slider1 = document.getElementById('slider1');
+  const slider2 = document.getElementById('slider2');
+  const valueDisplay1 = document.getElementById('value1');
+  const valueDisplay2 = document.getElementById('value2');
+  const inverseLeft = document.getElementById('inverse-left');
+  const inverseRight = document.getElementById('inverse-right');
+  const range = document.getElementById('range');
+  const thumb1 = document.getElementById('thumb1');
+  const thumb2 = document.getElementById('thumb2');
+  const sign1 = document.getElementById('sign1');
+  const sign2 = document.getElementById('sign2');
+
+  function updateSlider(whichSlider) {
+      let value1 = parseInt(slider1.value);
+      let value2 = parseInt(slider2.value);
+
+      if (whichSlider === 'slider1' && value1 > value2) {
+          slider1.value = value2;
+          value1 = value2;
+      } else if (whichSlider === 'slider2' && value2 < value1) {
+          slider2.value = value1;
+          value2 = value1;
+      }
+
+      valueDisplay1.innerHTML = value1;
+      valueDisplay2.innerHTML = value2;
+
+      const percent1 = (100 / (parseInt(slider1.max) - parseInt(slider1.min))) * (value1 - parseInt(slider1.min));
+      const percent2 = (100 / (parseInt(slider2.max) - parseInt(slider2.min))) * (value2 - parseInt(slider2.min));
+
+      inverseLeft.style.width = percent1 + '%';
+      range.style.left = percent1 + '%';
+      range.style.right = (100 - percent2) + '%';
+      thumb1.style.left = percent1 + '%';
+      sign1.style.left = percent1 + '%';
+
+      inverseRight.style.width = (100 - percent2) + '%';
+      thumb2.style.left = percent2 + '%';
+      sign2.style.left = percent2 + '%';
+  }
+
+  slider1.addEventListener('input', () => updateSlider('slider1'));
+  slider2.addEventListener('input', () => updateSlider('slider2'));
+
+  updateSlider();
+</script>
+
+{% endblock content %}

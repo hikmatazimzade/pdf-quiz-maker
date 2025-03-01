@@ -1,0 +1,92 @@
+{% extends 'partials/base.html' %} 
+{% load static %}
+{% load i18n %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %} 
+
+{% block page_title %} {% trans "Profile" %} {% endblock %} 
+
+{% block content %}
+{% include "partials/messages.html" %}
+{% include 'partials/navbar.html' %}
+{% include 'partials/_profile-topbar.html' %}
+
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-3 col-lg-3">
+            {% include 'partials/_profile-menu.html' %}
+          </div>
+          <div class="col-xl-9 col-lg-9">
+            <div class="bg-white p-3 widget shadow rounded mb-4">
+            <div id="sidebar-1-1">
+                  <div class=" d-sm-flex align-items-center justify-content-between mb-3">
+                    <h1 class="h5 mb-0 text-gray-900">{% trans "Profile" %}</h1>
+                  </div>
+
+                  {% for error in user_form.non_field_errors %}
+                  <div class="alert alert-danger">{{ error }}</div>
+                  {% endfor %}
+                
+                  <div class="row">
+                    <div class="col">
+                        <form method="POST" novalidate enctype="multipart/form-data">
+                          {% csrf_token %}
+
+                          {% for field in user_form %}
+                            
+                            <div class="field_class">
+                              {% if field.errors %}
+                              <div class="alert alert-danger">{{ field.errors.0 }}</div>
+                              {% endif %}
+                              <label classs = "form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                              {{ field }}
+                            </div>
+
+                          {% endfor %}
+
+                          {% for i in profile_form %}
+                            <div class="field_class">
+                              {% if i.errors %}
+                                <div class="alert alert-danger">{{ i.errors.0 }}</div>
+                              {% endif %}
+                                <label class = "form-label" for="{{ field.id_for_label }}">{% trans "Profile Picture" %}</label>
+                              {% if i.name == 'avatar' %}
+                              
+                              <div class="custom-file">
+                                {{ i }}
+                                  <label class="custom-file-label" for="customFile"></label>
+                                
+                                {% else %}
+                                  {{ i }}
+                              </div>
+                              {% endif %}
+                        </div>
+                          {% endfor %}
+                          <div class="mb-3"></div>
+
+                          <button class="btn btn-primary" style="margin-top: 0vh !important;" type="submit">{% trans "Save" %}</button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.querySelectorAll("#sidebar-1 .nav-link")[0].classList.add("active");
+    </script>
+
+    {% include 'partials/_footer.html' %}
+  </div>
+</div>
+
+{% endblock %}

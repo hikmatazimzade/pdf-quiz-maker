@@ -1,0 +1,126 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block page_title %}{% trans "Register" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/authentification.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_error.css' %}">
+<link rel="stylesheet" href="{% static 'css/two_password.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+{% endblock %}
+
+
+{% block content %}
+<section class="vh gradient-custom">
+    <div class="container py-3 h-100"> <!-- Reduced top and bottom padding -->
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-4 text-center"> <!-- Adjusted padding -->
+              
+              <div class="mb-3 mt-md-4"> <!-- Reduced bottom margin -->
+                <h2 class="fw-bold mb-3 text-uppercase">{% trans "Register" %}</h2> <!-- Reduced margin-bottom -->
+                <p class="text-white-50 mb-3">{% trans "Please enter your details to create an account!" %}</p> <!-- Reduced margin-bottom -->
+                
+                <form method = "POST">
+                  {% csrf_token %}
+                <div class="form-outline form-white mb-3"> <!-- Added username field with reduced margin-bottom -->
+                  {% if form.username.errors %}
+                  <div class="form-error">{{ form.username.errors|first }}</div>
+                  {% endif %} 
+                  {{ form.username }}
+                  <label class="form-label" for="typeUsernameX"></label>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-6 form-outline form-white mb-3"> <!-- Reduced margin-bottom -->
+                    {{ form.first_name }}
+                    <label class="form-label" for="typeFirstNameX"></label>
+                  </div>
+
+                  <div class="col-lg-6 form-outline  form-white mb-3"> <!-- Reduced margin-bottom -->
+                    {{ form.last_name }}
+                    <label class="form-label" for="typeLastNameX"></label>
+                  </div>
+                </div>
+  
+
+                <div class="form-outline form-white mb-3">
+                  {% if form.email.errors %}
+                  <div class="form-error">{{ form.email.errors|first }}</div>
+                  {% endif %} 
+
+                  {{ form.email }}
+                  <label class="form-label" for="typeEmailX"></label>
+                </div>
+  
+
+                <div class="form-outline form-white mb-3">
+                  {% if form.password1.errors %}
+                  <div class="form-error">{{ form.password1.errors|first }}</div>
+                  {% endif %}
+                  <div class="input-group">
+                    {{ form.password1 }}
+                    <span class="input-group-text">
+                        <i class="bi bi-eye-slash" id="togglePassword"></i>
+                    </span>
+                  </div>
+                  <label class="form-label" for="typePasswordX"></label>
+                </div>
+                
+
+                <div class="form-outline form-white mb-3"> <!-- Reduced margin-bottom -->
+                  {% if form.password2.errors %}
+                  <div class="form-error">{{ form.password2.errors|first }}</div>
+                  {% endif %}
+                  <div class="input-group">
+                    {{ form.password2 }}
+                    <span class="input-group-text">
+                        <i class="bi bi-eye-slash" id="togglePassword2"></i>
+                    </span>
+                  </div>
+                  <label class="form-label" for="typePasswordX2"></label>
+                </div>
+  
+                <button class="btn btn-outline-light btn-lg px-5" type="submit">{% trans "Register" %}</button>
+                
+                <form>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#typePasswordX");
+
+    togglePassword.addEventListener("click", function () {
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        
+        this.classList.toggle("bi-eye");
+    });
+
+</script>
+
+
+<script>
+  const togglePassword2 = document.querySelector("#togglePassword2");
+  const password2 = document.querySelector("#typePasswordX2");
+
+  togglePassword2.addEventListener("click", function () {
+      const type = password2.getAttribute("type") === "password" ? "text" : "password";
+      password2.setAttribute("type", type);
+      
+      this.classList.toggle("bi-eye");
+  });
+
+</script>
+
+{% endblock content %}

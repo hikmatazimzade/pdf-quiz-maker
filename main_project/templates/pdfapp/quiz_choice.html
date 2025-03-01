@@ -1,0 +1,42 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block page_title %}{%trans "Quiz Choice" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/quiz_choice.css' %}">
+{% endblock css_files %}
+
+
+{% block content %}
+{% include "partials/messages.html" %}
+{% include "partials/navbar.html" %}
+
+<div class="quiz-container">
+    {% for q in quizzes %}
+    <div class="quiz-box">
+      <h2>{{ q.quiz_name }}</h2>
+      <h3>{% trans "Test Number:" %} {{ q.test_number }}</h3>
+      {% if q.show_number %}
+      <h3>{% trans "Show Numbers:Active" %}</h3>
+      {% else %}
+      <h3>{% trans "Show Numbers: Deactive" %}</h3>
+      {% endif %}
+      <div class="mt-4">
+        <a href="{% url 'quiz' q.slug %}" class="btn btn-primary">{% trans "Start Quiz" %}</a>
+      </div>
+      
+      <div class="mt-4">
+        <a href="{% url 'edit_quiz' q.slug %}" class="btn btn-primary">{% trans "Edit Quiz" %}</a>
+      </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+<div class="mb-5"></div>
+{% include "partials/_footer.html" %}
+{% endblock content %}

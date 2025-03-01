@@ -1,0 +1,160 @@
+.btn-custom {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-custom:hover {
+    background-color: #34495E;
+    transform: scale(1.05);
+  }
+  
+  
+.footer-help {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+  }
+  
+  .footer-help a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .footer-help p {
+    margin: 10px 0;
+  }
+  
+
+  .step-section {
+    padding: 40px 0;
+}
+
+.step-section:nth-child(odd) .row {
+    flex-direction: row-reverse;
+}
+
+.step-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.step-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.step-section p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+
+.step-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform, box-shadow;
+}
+
+.step-card:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.step-card {
+  margin-bottom: 60px;
+}
+
+.language-dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+.language-dropdown select {
+  border: 2px solid #ddd; /* Border color */
+  border-radius: 4px;
+  font-size: 16px; /* Adjust font size as needed */
+  padding: 5px 10px;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* Style for dropdown arrow */
+.language-dropdown select::-ms-expand {
+  display: none;
+}
+
+.language-dropdown:hover select {
+  border-color: #888; /* Color when hovered */
+}
+
+/* Optional: Style for options */
+.language-dropdown option {
+  padding: 5px 10px;
+}
+
+.coffee-button {
+  position: absolute; /* Keeps the button positioned absolutely to the nearest relative parent */
+  top: 150px; /* Adjust based on the actual height of your navbar */
+  right: 15px; /* Distance from the right edge */
+  z-index: 1000; /* Ensures it's above other content */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effects */
+}
+
+
+.coffee-button img {
+  height: 90px; /* Adjust the size if needed to make it larger */
+  width: auto;
+}
+
+.coffee-button:hover img {
+  transform: scale(1.1);
+}
+
+@media only screen and (max-width: 1024px) {
+  .mobile_coffee {
+    position: absolute;
+    top: -50px;
+    right: 15px;
+    z-index: 1000;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .mobile_coffee img {
+    height: 90px;
+    width: auto;
+  }
+
+  .mobile_coffee:hover img {
+    transform: scale(1.1);
+  }
+}
+
+.usage_class{
+  margin-top: 20vh !important;
+}
+
+
+.card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

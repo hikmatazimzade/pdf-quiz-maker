@@ -1,0 +1,17 @@
+{% if messages %}
+<div class="messages-container" style="position: fixed; top: 0; left: 50%; transform: translateX(-50%); z-index: 1050; width: 100%; max-width: 1000px;">
+        {% for message in messages %}
+            <div id="alert{{ forloop.counter }}" class="alert {{ message.tags }} alert-dismissible fade show text-center" role="alert">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <script>
+                setTimeout(function () {
+                    var alert{{ forloop.counter }} = new bootstrap.Alert(document.getElementById('alert{{ forloop.counter }}'));
+                    alert{{ forloop.counter }}.close();
+                }, 5000);
+            </script>
+        {% endfor %}
+    </div>
+{% endif %} 

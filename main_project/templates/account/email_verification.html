@@ -1,0 +1,52 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Verification Code" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/authentification.css' %}">
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/form_error.css' %}">
+{% endblock %}
+
+{% block content %}
+{% include "partials/messages.html" %}
+<section class="min-vh-100 d-flex gradient-custom align-items-center justify-content-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-4 text-center">
+
+            <h2 class="fw-bold mb-3 text-uppercase">{% trans "Verification Code" %}</h2>
+            <p class="text-white-50 mb-4">{% trans "Enter the 5-digit code sent to your email." %}</p>
+            
+            <form method="POST">
+              {% csrf_token %}
+              {% if form.non_field_errors %}
+              <div class="form-error">{{ form.non_field_errors.0 }}</div>
+              {% endif %}
+              <div class="form-outline form-white mb-4">
+                {% if form.code.errors %}
+                <div class="form-error">{{ form.code.errors.0 }}</div>
+                {% endif %}
+                {{ form.code }}
+                <label class="form-label" for="verificationCode"></label>
+              </div>
+
+              <button class="btn btn-outline-light btn-lg mb-3 w-100" type="submit">{% trans "Verify Code" %}</button>
+            </form>
+
+            <div class="mt-4">
+              <p class="mb-0">{% trans "Didn't receive a code?" %} <a href="{% url 'resend_code' %}" id="resendCode">{% trans "Resend" %}</a></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

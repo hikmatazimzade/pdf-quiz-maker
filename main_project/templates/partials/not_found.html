@@ -1,0 +1,53 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 Not Found</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 150px;
+            background: url('{% static "img/page_not_found.webp" %}') no-repeat center center fixed; 
+            -webkit-background-size: cover; 
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        h1 {
+            font-size: 50px;
+            color: white;
+        }
+        body {
+            font: 20px Helvetica, sans-serif;
+            color: #fff;
+        }
+        article {
+            display: block;
+            text-align: left;
+            width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+        a {
+            color: #dc8100;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>{% trans "Oops! Page not found." %}</h1>
+        <div>
+            <p>{% trans "We're sorry, but the page you were looking for doesn't exist. You might have typed the wrong address or the page may have moved." %}</p>
+            <p><a href="{% url 'home' %}">{% trans "Back to Homepage" %}</a></p>
+        </div>
+    </article>
+</body>
+</html>

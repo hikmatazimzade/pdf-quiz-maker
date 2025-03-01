@@ -1,0 +1,658 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-07 16:00+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\account\forms.py:15
+msgid "Minimum length of password should be 8!"
+msgstr "Parolun minimum uzunluğu 8 olmalıdır!"
+
+#: .\account\forms.py:16 .\account\forms.py:65
+msgid "Password"
+msgstr "Parol"
+
+#: .\account\forms.py:29
+msgid "Remember Me"
+msgstr "Məni Xatırla"
+
+msgid "The minimum length of username should be 7!"
+msgstr "İstifadəçi adının minimum uzunluğu 7 olmalıdır!"
+
+#: .\account\forms.py:37 .\account\forms.py:173
+msgid "Username"
+msgstr "İstifadəçi Adı"
+
+#: .\account\forms.py:44 .\account\forms.py:178
+msgid "First Name"
+msgstr "Ad"
+
+#: .\account\forms.py:51 .\account\forms.py:183
+msgid "Last Name"
+msgstr "Soyad"
+
+#: .\account\forms.py:62 .\account\forms.py:69 .\account\forms.py:140
+#: .\account\forms.py:147
+msgid "The minimum length of password should be 8!"
+msgstr "Parolun minimum uzunluğu 8 olmalıdır!"
+
+#: .\account\forms.py:72 .\account\forms.py:150
+msgid "Confirm Password"
+msgstr "Parolu Təsdiqlə"
+
+#: .\account\forms.py:79
+msgid "The user with this email already exists!"
+msgstr "Bu email'e malik istifadəçi artıq mövcuddur!"
+
+#: .\account\forms.py:88 .\account\forms.py:159 .\account\forms.py:237
+msgid "The passwords don't match!"
+msgstr "Parollar uyuşmur!"
+
+#: .\account\forms.py:96
+msgid "The user with this username already exists!"
+msgstr "Bu istifadəçi adına malik hesab artıq mövcuddur!"
+
+#: .\account\forms.py:111
+msgid "User with this email doesn't exist!"
+msgstr "Bu email'ə malik hesab mövcud deyil!"
+
+#: .\account\forms.py:116
+msgid "The length of code must be 5!"
+msgstr "Kodun minimum uzunluğu 5 olmalıdır!"
+
+#: .\account\forms.py:119
+msgid "Input the code"
+msgstr "Kodu daxil edin"
+
+#: .\account\forms.py:131
+msgid "Input the code that was sent to your email!"
+msgstr "Email'nizə göndərilmiş kodu daxil edin!"
+
+#: .\account\forms.py:143 .\account\forms.py:221
+msgid "New Password"
+msgstr "Yeni Parol"
+
+#: .\account\forms.py:194
+msgid "Input Picture!"
+msgstr "Şəkil daxil edin!"
+
+#: .\account\forms.py:211 .\account\forms.py:218 .\account\forms.py:225
+msgid "The minim password length must be 8!"
+msgstr "Parol minimum uzunluğu 8 olmalıdır!"
+
+#: .\account\forms.py:214
+msgid "Old Password"
+msgstr "Əvvəlki Parol"
+
+#: .\account\forms.py:228
+msgid "Confirm New Password"
+msgstr "Yeni Parolu Təsdiqlə"
+
+#: .\account\views.py:18
+msgid "Already logged in!"
+msgstr "Artıq hesaba daxil olmusunuz!"
+
+#: .\account\views.py:22 .\account\views.py:143
+msgid "Try again later!"
+msgstr "Daha sonra yenidən cəhd edin!"
+
+#: .\account\views.py:50
+msgid "Successfully Logged in!"
+msgstr "Uğurla giriş edildi"
+
+#: .\account\views.py:62
+msgid "Email or password is wrong!"
+msgstr "E-poçt və ya parol səhvdir!"
+
+#: .\account\views.py:88
+msgid "Successfully logged in!"
+msgstr "Uğurla daxil olundu!"
+
+#: .\account\views.py:111 .\account\views.py:177
+msgid "Input this code to verify your email"
+msgstr "Bu kodu daxil edərək email'nizi doğrulayın"
+
+#: .\account\views.py:118 .\account\views.py:184 .\pdfapp\views.py:42
+#: .\pdfapp\views.py:283 .\pdfapp\views.py:334
+msgid "An error occured!"
+msgstr "Xəta Baş Verdi!"
+
+#: .\account\views.py:121
+msgid "Failed to send email. Please try again."
+msgstr ""
+"Email göndərilən zaman xəta baş verdi. Zəhmət olmasa yenidən cəhd edin!"
+
+#: .\account\views.py:138 .\account\views.py:196
+msgid "Verification code expired!"
+msgstr "Verifikasiya Kodunun vaxtı bitib!"
+
+#: .\account\views.py:166
+msgid "You've sent too many resend requests!"
+msgstr "Yüksək miqdarda təkrar sorğusu göndərdiniz!"
+
+#: .\account\views.py:209
+msgid "Input your email again!"
+msgstr "Email'nizi yenidən daxil edin!"
+
+#: .\account\views.py:215
+msgid "The new password can't be same with the previous one!"
+msgstr "Yeni parol əvvəlki ilə eyni ola bilməz!"
+
+#: .\account\views.py:225
+msgid "Your password was successfully updated!"
+msgstr "Parolunuz uğurla yeniləndi!"
+
+#: .\account\views.py:242
+msgid "Successfully updated profile information!"
+msgstr "Profil məlumatı uğurla yeniləndi!"
+
+#: .\account\views.py:270
+msgid "Successfully changed your password!"
+msgstr "Parolunuz uğurla dəyişdirildi!"
+
+#: .\account\views.py:273
+msgid "Input your current password right!"
+msgstr "Cari parolunuzu düzgün daxil edin!"
+
+#: .\account\views.py:283
+msgid "Logged out of your account!"
+msgstr "Hesabınızdan çıxdınız!"
+
+#: .\main_project\settings.py:40
+msgid "English"
+msgstr "İngiliscə"
+
+#: .\main_project\settings.py:41
+msgid "Azerbaijani"
+msgstr "Azərbaycanca"
+
+#: .\pdfapp\forms.py:18
+msgid "The minimum length of subject must be 5!"
+msgstr "Mövzunun minimum uzunluğu 5 olmalıdır!"
+
+#: .\pdfapp\forms.py:23
+msgid "The minimum length of message must be 30!"
+msgstr "Mesajın minimum uzunluğu 30 olmalıdır!"
+
+#: .\pdfapp\forms.py:60 .\pdfapp\forms.py:93
+msgid "The pdf with this name already exists!"
+msgstr "Bu ada malik pdf artıq mövcuddur!"
+
+#: .\pdfapp\views.py:25 .\pdfapp\views.py:74 .\pdfapp\views.py:126
+msgid "This quiz doesn't exist!"
+msgstr "Bu quiz mövcud deyil!"
+
+#: .\pdfapp\views.py:54
+msgid "There are not this many questions in this quiz!"
+msgstr "Quiz' də bu qədər sual mövcud deyil!"
+
+#: .\pdfapp\views.py:92 .\pdfapp\views.py:270
+msgid "There are not this many tests in this pdf!"
+msgstr "Pdf' də bu qədər test mövcud deyil!"
+
+#: .\pdfapp\views.py:112
+msgid "Successfully saved!"
+msgstr "Uğurla yadda saxlanıldı!"
+
+#: .\pdfapp\views.py:124
+msgid "Quiz successfully deleted!"
+msgstr "Quiz uğurla silindi!"
+
+#: .\pdfapp\views.py:277
+msgid "Quiz successfully created!"
+msgstr "Quiz uğurla yaradıldı!"
+
+#: .\pdfapp\views.py:313
+msgid "You have sent too many messages!"
+msgstr "Yüksək sayda mesaj göndərdiniz!"
+
+#: .\templates\account\change_password.html:6
+#: .\templates\account\change_password_email.html:5
+#: .\templates\partials\_profile-menu.html:9
+msgid "Change Password"
+msgstr "Parolu Dəyişmək"
+
+#: .\templates\account\change_password.html:34
+msgid "Account Settings"
+msgstr "Hesab Tənzimləmələri"
+
+#: .\templates\account\change_password_email.html:22
+msgid "Set New Password"
+msgstr "Yeni Parol Təyin Etmək"
+
+#: .\templates\account\change_password_email.html:23
+msgid "Enter and confirm your new password."
+msgstr "Yeni parol daxil edib təsdiqləyin."
+
+#: .\templates\account\change_password_email.html:54
+msgid "Set Password"
+msgstr "Parol Dəyişmək"
+
+#: .\templates\account\email_verification.html:5
+#: .\templates\account\email_verification.html:22
+msgid "Verification Code"
+msgstr "Verifikasiya Kodu"
+
+#: .\templates\account\email_verification.html:23
+msgid "Enter the 5-digit code sent to your email."
+msgstr "Email'nizə göndərilmiş 5 rəqəmli kodu daxil edin."
+
+#: .\templates\account\email_verification.html:38
+msgid "Verify Code"
+msgstr "Kodu doğrulayın"
+
+#: .\templates\account\email_verification.html:42
+msgid "Didn't receive a code?"
+msgstr "Kod email'nizə gəlmədi?"
+
+#: .\templates\account\email_verification.html:42
+msgid "Resend"
+msgstr "Yenidən Göndər"
+
+#: .\templates\account\input_email.html:5
+msgid "Email Verification"
+msgstr "Email verifikasiyası"
+
+#: .\templates\account\input_email.html:22
+msgid "Reset Password"
+msgstr "Parolu Sıfırlamaq"
+
+#: .\templates\account\input_email.html:23
+msgid "Enter your email to receive the verification code."
+msgstr "Verifikasiya kodu almaq üçün email adresinizi daxil edin."
+
+#: .\templates\account\input_email.html:38
+msgid "Send Verification Code"
+msgstr "Verifikasiya Kodu Göndər"
+
+#: .\templates\account\input_email.html:43
+msgid "Return to Home Page"
+msgstr "Ana Səhifəyə Qayıt"
+
+#: .\templates\account\input_email.html:48
+msgid "Remembered your password?"
+msgstr "Parolunuzu xatırladınız"
+
+#: .\templates\account\input_email.html:48 .\templates\account\login.html:4
+#: .\templates\account\login.html:27 .\templates\account\login.html:58
+msgid "Login"
+msgstr "Giriş"
+
+#: .\templates\account\login.html:28
+msgid "Please enter your email and password!"
+msgstr "Email və parolunuzu daxil edin!"
+
+#: .\templates\account\login.html:56
+msgid "Forgot password?"
+msgstr "Parolu unutdunuz?"
+
+#: .\templates\account\login.html:63
+msgid "Don't have an account?"
+msgstr "Hesabınız yoxdur?"
+
+#: .\templates\account\login.html:63
+msgid "Sign Up"
+msgstr "Qeydiyyat"
+
+#: .\templates\account\profile.html:10 .\templates\account\profile.html:29
+#: .\templates\partials\_profile-menu.html:5
+msgid "Profile"
+msgstr "Profil"
+
+#: .\templates\account\profile.html:54
+msgid "Profile Picture"
+msgstr "Profil Şəkli"
+
+#: .\templates\account\profile.html:69
+msgid "Save"
+msgstr "Təsdiqlə"
+
+#: .\templates\account\register.html:4 .\templates\account\register.html:23
+#: .\templates\account\register.html:86
+msgid "Register"
+msgstr "Qeydiyyat"
+
+#: .\templates\account\register.html:24
+msgid "Please enter your details to create an account!"
+msgstr "Hesab yaratmaq üçün məlumatlarınızı daxil edin!"
+
+#: .\templates\partials\_footer.html:6
+msgid "Made By Hikmet"
+msgstr "Hikmət tərəfindən hazırlanmışdır"
+
+#: .\templates\partials\_profile-menu.html:12
+#: .\templates\partials\navbar.html:34
+msgid "Logout"
+msgstr "Hesabdan Çıxış"
+
+#: .\templates\partials\_profile-topbar.html:14
+msgid "Sign out"
+msgstr "Hesabdan Çıxış"
+
+#: .\templates\partials\navbar.html:12 .\templates\pdfapp\home.html:4
+msgid "Home"
+msgstr "Ana Səhifə"
+
+#: .\templates\partials\navbar.html:18 .\templates\pdfapp\about.html:4
+msgid "About"
+msgstr "Haqqında"
+
+#: .\templates\partials\navbar.html:21 .\templates\pdfapp\contact.html:4
+msgid "Contact"
+msgstr "Əlaqə"
+
+#: .\templates\partials\navbar.html:33
+msgid "View Profile"
+msgstr "Profili Görüntülə"
+
+#: .\templates\partials\navbar.html:39
+msgid "Login/Register"
+msgstr "Giriş/Qeydiyyat"
+
+#: .\templates\partials\not_found.html:44
+msgid "Oops! Page not found."
+msgstr "Oops!Səhifə tapılmadı."
+
+#: .\templates\partials\not_found.html:46
+msgid ""
+"We're sorry, but the page you were looking for doesn't exist. You might have "
+"typed the wrong address or the page may have moved."
+msgstr ""
+"Üzr istəyirik, amma axtardığınız səhifə mövcud deyil. Ünvan səhv daxil "
+"edilmiş və ya səhifə köçürülmüş olar bilər"
+
+#: .\templates\partials\not_found.html:47
+msgid "Back to Homepage"
+msgstr "Ana səhifəyə qayıt"
+
+#: .\templates\pdfapp\about.html:20
+msgid "About PDF Quiz Maker"
+msgstr "Pdf Quiz Maker Haqqında"
+
+#: .\templates\pdfapp\about.html:24
+msgid ""
+"PDF Quiz Maker is an innovative tool designed to streamline the process of "
+"creating quizzes from PDF documents. Our platform allows educators, "
+"students, and professionals to automatically generate quiz questions based "
+"on highlighted text within a PDF. This simplifies the quiz creation process, "
+"saving time and ensuring that key concepts are captured effectively."
+msgstr ""
+"PDF Quiz Maker, PDF sənədlərindən testlər yaratmaq prosesini asanlaşdırmaq "
+"üçün nəzərdə tutulmuş yenilikçi bir vasitədir. Platformamız müəllimlərə, "
+"tələbələrə və mütəxəssislərə PDF daxilində vurğulanmış mətn əsasında "
+"avtomatik olaraq quiz sualları yaratmağa imkan verir. Bu, quiz yaradılması "
+"prosesini asanlaşdırır, vaxta qənaət edir və əsas anlayışların effektiv "
+"şəkildə tutulmasını təmin edir."
+
+#: .\templates\pdfapp\about.html:27
+msgid ""
+"With our user-friendly interface, creating a quiz is as easy as uploading "
+"your PDF and selecting the text to include. Our system handles the rest, "
+"giving you a ready-to-use quiz that can be shared, printed, or integrated "
+"into learning management systems."
+msgstr ""
+"Bizim istifadəçi dostu interfeysimizlə quiz yaratmaq PDF-i yükləmək və daxil "
+"ediləcək mətni seçmək qədər asandır. Sistemimiz qalan məsələləri həll edir, "
+"sizə paylaşıla, çap oluna və ya öyrənmə idarəetmə sistemlərinə inteqrasiya "
+"oluna bilən istifadəyə hazır quiz təqdim edir."
+
+#: .\templates\pdfapp\about.html:30
+msgid ""
+"At PDF Quiz Maker, we are committed to providing a valuable resource for "
+"educational technology and e-learning communities. We continuously improve "
+"our service based on user feedback and the latest educational trends. Join "
+"us in revolutionizing the way quizzes are created and utilized for education "
+"and training!"
+msgstr ""
+"PDF Quiz Maker-da biz təhsil texnologiyaları və e-təhsil icmaları üçün "
+"dəyərli resurs təqdim etməyə sadiqik. İstifadəçi rəyləri və ən son təhsil "
+"tendensiyaları əsasında xidmətimizi davamlı olaraq təkmilləşdiririk. Təhsil "
+"və təlimdə quiz' lərin yaradılması üsulunu dəyişdirmək üçün bizə qoşulun!"
+
+#: .\templates\pdfapp\about.html:33
+msgid "Features:"
+msgstr "Xüsusiyyətlər"
+
+#: .\templates\pdfapp\about.html:35
+msgid "Automatic quiz generation from highlighted text"
+msgstr "Vurğulanmış mətndən avtomatik quiz yaradılması"
+
+#: .\templates\pdfapp\about.html:36
+msgid "User-friendly interface for seamless quiz creation"
+msgstr "Rahat quiz yaratmaq üçün istifadəçi dostu interfeys"
+
+#: .\templates\pdfapp\about.html:37
+msgid "Support for multiple question types"
+msgstr "Çoxlu sual növləri üçün dəstək"
+
+#: .\templates\pdfapp\about.html:38
+msgid "Integration capabilities with popular learning platforms"
+msgstr "Məşhur öyrənmə platformaları ilə inteqrasiya imkanları"
+
+#: .\templates\pdfapp\about.html:39
+msgid "Customizable quiz options to fit educational needs"
+msgstr "Təhsil ehtiyaclarına uyğunlaşdırıla bilən quiz seçimləri"
+
+#: .\templates\pdfapp\contact.html:21
+msgid "Contact us"
+msgstr "Əlaqə"
+
+#: .\templates\pdfapp\contact.html:23
+msgid ""
+"Do you have any questions? Please do not hesitate to contact us directly."
+msgstr "Hər hansı bir sualınız var? Bizimlə birbaşa əlaqə saxlaya bilərsiniz."
+
+#: .\templates\pdfapp\contact.html:28
+msgid "Your name"
+msgstr "Adınız"
+
+#: .\templates\pdfapp\contact.html:37
+msgid "Your email"
+msgstr "Email Adresiniz"
+
+#: .\templates\pdfapp\contact.html:41
+msgid "Subject"
+msgstr "Mövzu"
+
+#: .\templates\pdfapp\contact.html:48
+msgid "Your message"
+msgstr "Mesajınız"
+
+#: .\templates\pdfapp\contact.html:55
+msgid "SEND"
+msgstr "Göndər"
+
+#: .\templates\pdfapp\create_quiz.html:4 .\templates\pdfapp\create_quiz.html:55
+msgid "Create Quiz"
+msgstr "Yeni Quiz"
+
+#: .\templates\pdfapp\create_quiz.html:31 .\templates\pdfapp\edit_quiz.html:28
+msgid "Quiz Name"
+msgstr "Quiz adı"
+
+#: .\templates\pdfapp\create_quiz.html:36 .\templates\pdfapp\edit_quiz.html:36
+msgid "Quiz Question Number"
+msgstr "Quiz Sual Nömrəsi"
+
+#: .\templates\pdfapp\create_quiz.html:42 .\templates\pdfapp\edit_quiz.html:41
+msgid "Show Question Number"
+msgstr "Sual Nömrəsini Göstər"
+
+#: .\templates\pdfapp\create_quiz.html:51
+msgid "Variant Number"
+msgstr "Variant Sayı"
+
+#: .\templates\pdfapp\edit_quiz.html:5 .\templates\pdfapp\quiz_choice.html:33
+msgid "Edit Quiz"
+msgstr "Dəyişiklik Etmək"
+
+#: .\templates\pdfapp\edit_quiz.html:51
+msgid "Save Changes"
+msgstr "Redakte Et"
+
+#: .\templates\pdfapp\edit_quiz.html:56
+msgid "Delete Quiz"
+msgstr "Quiz'i Sil"
+
+#: .\templates\pdfapp\home.html:54
+msgid "Welcome to PDF Quiz Maker!"
+msgstr "PDF QUIZ MAKER'a Xoş Gəldiniz!"
+
+#: .\templates\pdfapp\home.html:55
+msgid "Turn your PDFs into interactive quizzes with just a few clicks"
+msgstr "Bir neçə kliklə PDF-lərinizi interaktiv quiz'lərə çevirin"
+
+#: .\templates\pdfapp\home.html:59
+msgid "Create New Quiz"
+msgstr "Yeni Quiz yaradın"
+
+#: .\templates\pdfapp\home.html:63
+msgid "Usage of Pdf Quiz Maker"
+msgstr "Pdf Quiz Maker'dan istifadə qaydası"
+
+#: .\templates\pdfapp\home.html:71
+msgid "Step 1"
+msgstr "Addım 1"
+
+#: .\templates\pdfapp\home.html:72
+msgid "Highlight correct answers in your pdf"
+msgstr "PDF'nizdə düzgün cavabları işarələyin"
+
+#: .\templates\pdfapp\home.html:81
+msgid "Step 2"
+msgstr "Addım 2"
+
+#: .\templates\pdfapp\home.html:82
+msgid "Upload your PDF with highlighted text"
+msgstr "İşarələdiyiniz PDF'i yükləyin"
+
+#: .\templates\pdfapp\home.html:91
+msgid "Step 3"
+msgstr "Addım 3"
+
+#: .\templates\pdfapp\home.html:92
+msgid "Review and edit your quiz"
+msgstr "Quiz'nizi nəzərdən keçirin və redaktə edin"
+
+#: .\templates\pdfapp\home.html:101
+msgid "Step 4"
+msgstr "Addım 4"
+
+#: .\templates\pdfapp\home.html:102
+msgid "Generate and solve your quiz"
+msgstr "Quiz'nizi yaradın və həll edin"
+
+#: .\templates\pdfapp\home.html:110
+msgid "Need Help? Reach out to us at"
+msgstr "Dəstəyə ehtiyacınız var? Bizə yazın"
+
+#: .\templates\pdfapp\home.html:110
+msgid "Contact Page"
+msgstr "Əlaqə Səhifəsi"
+
+#: .\templates\pdfapp\quiz.html:21
+msgid "Next"
+msgstr "Növbəti"
+
+#: .\templates\pdfapp\quiz.html:23
+msgid "Back to Quiz Choice Page"
+msgstr "Quiz Seçim ekranına geri qayıt"
+
+#: .\templates\pdfapp\quiz_choice.html:4
+msgid "Quiz Choice"
+msgstr "Quiz Seçimi"
+
+#: .\templates\pdfapp\quiz_choice.html:22
+msgid "Test Number:"
+msgstr "Test Sayı:"
+
+#: .\templates\pdfapp\quiz_choice.html:24
+msgid "Show Numbers:Active"
+msgstr "Nömrələri Göstər: Aktiv"
+
+#: .\templates\pdfapp\quiz_choice.html:26
+msgid "Show Numbers: Deactive"
+msgstr "Nömrələri Göstər: Deaktiv"
+
+#: .\templates\pdfapp\quiz_choice.html:29
+msgid "Start Quiz"
+msgstr "Quiz'ə başlamaq"
+
+
+#~ msgid "Start Quiz Again"
+#~ msgstr "Quiz'ə Yenidən Başlamaq"
+
+msgid "User Guide"
+msgstr "İstifadəçi Rəhbəri"
+
+
+msgid "Quiz Maker User Guide"
+msgstr "Quiz Maker İstifadəçi Rəhbəri"
+
+msgid "1. Highlighting Answers in PDF"
+msgstr "1. PDF-də cavabların işarələnməsi"
+
+msgid "Make sure all the answers in PDF are highlighted (especially variants like A), B), etc.). Otherwise, the answers might be mixed up during quiz generation."
+msgstr "PDF-dəki bütün cavabların vurğulandığından əmin olun (xüsusilə A), B) və s. kimi variantlar). Əks halda, sorğunun yaradılması zamanı sualların cavabları qarışa bilər."
+
+msgid "2. Single Answer for Each Question"
+msgstr "2. Hər Sual üçün Tək Cavab"
+
+msgid "Ensure that only one answer is highlighted for each question in your PDF. Multiple highlighted answers for a single question can lead to incorrect quiz generation."
+msgstr "PDF-inizdə hər sual üçün yalnız bir cavabın vurğulandığından əmin olun. Bir sual üçün bir neçə vurğulanmış cavab yanlış quiz'in yaradılmasına səbəb ola bilər."
+
+msgid "3. Consistent Variant Number"
+msgstr "3. Ardıcıl Variant Nömrəsi"
+
+msgid "Each test should have the same number of variants consistently. If you have a varying number of variants across questions, it may cause issues in the quiz structure."
+msgstr "Hər bir test ardıcıl olaraq eyni sayda varianta malik olmalıdır. Suallarda müxtəlif sayda variant varsa, bu, quiz strukturunda problemlər yarada bilər."
+
+msgid "4. Page Numbers and Formatting"
+msgstr "4. Səhifə Nömrələri və Formatlaşdırma"
+
+msgid "Keep an eye on page numbers and formatting in your PDF documents. Ensure that questions and answers are clear, and page breaks do not disrupt the readability of content."
+msgstr "PDF sənədlərinizdə səhifə nömrələrinə və formatına diqqət yetirin. Sualların və cavabların aydın olduğundan və səhifə fasilələrinin məzmunun oxunaqlılığını pozmadığından əmin olun."
+
+msgid "5. Use Clear and Legible Fonts"
+msgstr "5. Aydın və Oxunan Şriftlərdən istifadə edin"
+
+msgid "When creating PDFs for quiz generation, use clear and legible fonts. Avoid decorative or hard-to-read fonts that may lead to misinterpretation of content."
+msgstr "Quiz yaratmaq üçün PDF daxilində aydın və oxunaqlı şriftlərdən istifadə edin. Məzmunun yanlış təfsirinə səbəb ola biləcək dekorativ və ya çətin oxunan şriftlərdən çəkinin."
+
+msgid "There are not this many tests in this range!"
+msgstr "Bu aralıqda bu qədər test mövcud deyil!"
+
+msgid "Quiz Question Range"
+msgstr "Quiz Sual Aralığı"
+
+msgid "The maximum quiz limit for each account is 8!"
+msgstr "Hər hesab üçün maksimum quiz limiti 8-dir!"
+
+msgid "Shuffle Variants"
+msgstr "Variantları Qarışdır"
+
+msgid "You have uploaded many PDFs recently; please try again {remaining} {minute_text} later!"
+msgstr "Yüksək miqdarda PDF daxil etmisiniz; zəhmət olmasa {remaining} dəqiqə sonra yenidən cəhd edin!"
+
+msgid "Loading"
+msgstr "Yüklənmə"
+
+msgid "Quiz is being created..."
+msgstr "Quiz Yaradılır..."
+
+msgid "Your message was successfully sent!"
+msgstr "Mesajınız uğurla göndərildi!"

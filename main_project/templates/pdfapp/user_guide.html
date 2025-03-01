@@ -1,0 +1,50 @@
+{% extends "partials/base.html" %}
+{% load static %}
+{% load i18n %}
+{% block page_title %}{%trans "User Guide" %}{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/messages.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link rel="stylesheet" href="{% static 'css/user_guide.css' %}">
+{% endblock css_files %}
+
+
+{% block content %}
+{% include "partials/messages.html" %}
+{% include "partials/navbar.html" %}
+
+
+<div class="container">
+    <div class="mb-5"><h1>{%trans "Quiz Maker User Guide" %}</h1></div>
+    
+    <div class="feature">
+        <h2>{%trans "1. Highlighting Answers in PDF" %}</h2>
+        <p>{%trans "Make sure all the answers in PDF are highlighted (especially variants like A), B), etc.). Otherwise, the answers might be mixed up during quiz generation." %}</p>
+    </div>
+    
+    <div class="feature">
+        <h2>{%trans "2. Single Answer for Each Question" %}</h2>
+        <p>{%trans "Ensure that only one answer is highlighted for each question in your PDF. Multiple highlighted answers for a single question can lead to incorrect quiz generation." %}</p>
+    </div>
+    
+    <div class="feature">
+        <h2>{%trans "3. Consistent Variant Number" %}</h2>
+        <p>{%trans "Each test should have the same number of variants consistently. If you have a varying number of variants across questions, it may cause issues in the quiz structure." %}</p>
+    </div>
+
+    <div class="feature">
+        <h2>{%trans "4. Page Numbers and Formatting" %}</h2>
+        <p>{%trans "Keep an eye on page numbers and formatting in your PDF documents. Ensure that questions and answers are clear, and page breaks do not disrupt the readability of content." %}</p>
+    </div>
+
+    <div class="feature">
+        <h2>{%trans "5. Use Clear and Legible Fonts" %}</h2>
+        <p>{%trans "When creating PDFs for quiz generation, use clear and legible fonts. Avoid decorative or hard-to-read fonts that may lead to misinterpretation of content." %}</p>
+    </div>
+    
+
+</div>
+
+
+{% endblock content %}

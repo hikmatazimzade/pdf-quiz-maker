@@ -1,0 +1,16 @@
+{% load i18n %}
+<div class="bg-white p-3 widget shadow rounded mb-4">
+    <div class="nav nav-pills flex-column lavalamp" id="sidebar-1">
+      <a class="nav-link" href="{% url 'profile' %}">
+          <i class="fas fa-user-circle fa-sm fa-fw mr-2 text-gray-400"></i> {% trans "Profile" %}
+      </a>
+      
+      <a class="nav-link" href="{% url 'change_password' %}">
+          <i class="fa fa-key fa-sm fa-fw mr-2 text-gray-400"></i>{% trans "Change Password" %}</a>
+  
+      <a class="nav-link" href="{% url 'logout' %}">
+          <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>{% trans "Logout" %}
+      </a>
+    </div>
+  </div>
+  

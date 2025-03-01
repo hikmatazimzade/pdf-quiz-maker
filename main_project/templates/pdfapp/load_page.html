@@ -1,0 +1,38 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Loading" %}</title>
+    <link rel="stylesheet" href="{% static "css/load_page.css" %}">
+</head>
+<body>
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <p>{% trans "Quiz is being created..." %}</p>
+    </div>
+
+    <script>
+        function checkQuizStatus() {
+            fetch("{% url 'check_quiz_status' %}")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        window.location.href = "{% url 'success_quiz_choice' %}";
+                    } else if (data.status === "error") {
+                        window.location.href = "{% url 'create_error' %}";
+                    } else {
+                        setTimeout(checkQuizStatus, 2000);
+                    }
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(checkQuizStatus, 2000);
+        });
+    </script>
+</body>
+</html>
