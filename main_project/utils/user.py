@@ -2,12 +2,12 @@ import logging
 
 from django.core.cache import cache
 
-from pdfapp.models import Quiz_Model
+from pdfapp.models import QuizModel
 
 logger = logging.getLogger(__name__)
 
 
-def edit_user_quiz(user_quiz: Quiz_Model, quiz_name: str, test_number: int,
+def edit_user_quiz(user_quiz: QuizModel, quiz_name: str, test_number: int,
         show_number: bool, shuffle_variant: int,
         slider_1: int, slider_2: int) -> None:
     user_quiz.quiz_name = quiz_name

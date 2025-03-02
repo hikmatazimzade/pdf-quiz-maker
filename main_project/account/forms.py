@@ -2,10 +2,10 @@ from django import forms
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.forms import widgets
 from django.contrib.auth.models import User
-from .models import Profile_Model
+from .models import ProfileModel
 from django.utils.translation import gettext_lazy as _
 
-class Login_Form(forms.Form):
+class LoginForm(forms.Form):
     email = forms.EmailField(widget = widgets.EmailInput(attrs = {
         'placeholder' : 'Email',
         'id' : 'typeEmailX',
@@ -30,7 +30,7 @@ class Login_Form(forms.Form):
     }
 
 
-class Register_Form(forms.Form):
+class RegisterForm(forms.Form):
     username = forms.CharField(validators = [MinLengthValidator(7, _('The minimum length of username should be 7!'))],widget = widgets.TextInput(attrs = {
         'id' : 'typeUsernameX',
         'class' : 'form-control form-control-lg',
@@ -98,7 +98,7 @@ class Register_Form(forms.Form):
         return username
     
 
-class Input_Email_Form(forms.Form):
+class InputEmailForm(forms.Form):
     email = forms.EmailField(widget = widgets.EmailInput(attrs = {
         'id' : 'typeEmailX',
         'class' : 'form-control form-control-lg',
@@ -112,7 +112,7 @@ class Input_Email_Form(forms.Form):
 
         return email
     
-class Email_Verification_Form(forms.Form):
+class EmailVerificationForm(forms.Form):
     code = forms.CharField(max_length = 5, validators = [MinLengthValidator(5, _('The length of code must be 5!')), MaxLengthValidator(5, 'The length of code must be 5!')], widget = widgets.TextInput(attrs = {
         'id' : 'verificationCode',
         'class' : 'form-control form-control-lg',
@@ -122,7 +122,7 @@ class Email_Verification_Form(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        super(Email_Verification_Form, self).__init__(*args, **kwargs)
+        super(EmailVerificationForm, self).__init__(*args, **kwargs)
 
     def clean_code(self):
         code = self.cleaned_data.get('code', '')
@@ -136,7 +136,7 @@ class Email_Verification_Form(forms.Form):
         return code
     
 
-class Change_Password_Email_Form(forms.Form):
+class ChangePasswordEmailForm(forms.Form):
     password1 = forms.CharField(validators = [MinLengthValidator(8, _('The minimum length of password should be 8!'))],widget = widgets.PasswordInput(attrs = {
         'id' : 'typePasswordX',
         'class' : 'form-control form-control-lg',
@@ -160,7 +160,7 @@ class Change_Password_Email_Form(forms.Form):
 
         return password2
     
-class User_Form(forms.ModelForm):
+class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name')
@@ -184,9 +184,9 @@ class User_Form(forms.ModelForm):
         })
 
 
-class Profile_Form(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
-        model = Profile_Model
+        model = ProfileModel
         fields = ('avatar',)
 
         error_messages = {
@@ -207,7 +207,7 @@ class Profile_Form(forms.ModelForm):
         self.fields['avatar'].required = False
 
 
-class Change_Password_Form(forms.Form):
+class ChangePasswordForm(forms.Form):
     old_password = forms.CharField(validators = [MinLengthValidator(8, _('The minim password length must be 8!'))], widget = widgets.PasswordInput(attrs = {
         'id' : 'oldPassword',
         'class' : 'form-control form-control-lg',

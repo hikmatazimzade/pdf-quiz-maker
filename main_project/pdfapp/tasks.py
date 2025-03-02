@@ -2,8 +2,8 @@ from celery import shared_task
 from django.core.cache import cache
 from django.utils.text import slugify
 import fitz
-from .models import Quiz_Model
-from account.models import Profile_Model
+from .models import QuizModel
+from account.models import ProfileModel
 import json
 import base64
 
@@ -30,7 +30,7 @@ def create_quiz_task(cur_id, base64_content, variant_number, quiz_name, test_num
 
 
 
-        quiz_model_instance = Quiz_Model(quiz_name = quiz_name, test_number = test_number, max_test_number = length, first_boundary = 1, last_boundary = length, show_number = show_number, shuffle_variant = shuffle_variant, tests = serialized_data, user_id = cur_id)
+        quiz_model_instance = QuizModel(quiz_name = quiz_name, test_number = test_number, max_test_number = length, first_boundary = 1, last_boundary = length, show_number = show_number, shuffle_variant = shuffle_variant, tests = serialized_data, user_id = cur_id)
         slug = slugify(quiz_name)
         cache_name = str(cur_id) + slug
         
@@ -50,7 +50,7 @@ def create_quiz_task(cur_id, base64_content, variant_number, quiz_name, test_num
         quiz_model_instance.save()
 
 
-        profile_model = Profile_Model.objects.get(user__id = cur_id)
+        profile_model = ProfileModel.objects.get(user__id = cur_id)
         profile_model.current_quiz_number += 1
         profile_model.save()
         

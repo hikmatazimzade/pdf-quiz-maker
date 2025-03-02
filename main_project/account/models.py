@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-class Profile_Model(models.Model):
+class ProfileModel(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE, null = False)
     current_quiz_number = models.IntegerField(default = 0)
     avatar = models.ImageField(upload_to = 'account', blank = True)
@@ -18,5 +18,5 @@ def save_user_profile(sender, instance, **kwargs):
     try:
         instance.profile_model.save()
         
-    except Profile_Model.DoesNotExist:
-        Profile_Model.objects.create(user=instance)
+    except ProfileModel.DoesNotExist:
+        ProfileModel.objects.create(user=instance)

@@ -25,10 +25,10 @@ def login_request(request):
         return redirect('home')
 
     if request.method == "GET":
-        form = Login_Form()
+        form = LoginForm()
     
     else:
-        form = Login_Form(request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             next_url = handle_user_login(form.cleaned_data, request)
             if next_url:        
@@ -45,10 +45,10 @@ def login_request(request):
 
 def register(request):
     if request.method == "GET":
-        form = Register_Form()
+        form = RegisterForm()
     
     else:
-        form = Register_Form(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid() and handle_user_register(form.cleaned_data, request):
             messages.success(request, _('Successfully Registered!'))
             return redirect('home')
@@ -60,10 +60,10 @@ def register(request):
 
 def input_email(request):
     if request.method == "GET":
-        form = Input_Email_Form()
+        form = InputEmailForm()
 
     else:
-        form = Input_Email_Form(request.POST)
+        form = InputEmailForm(request.POST)
         if form.is_valid():
             user_email = form.cleaned_data['email']
             try:
@@ -98,10 +98,10 @@ def email_verification(request):
         return redirect('home')
     
     if request.method == "GET":
-        form = Email_Verification_Form()
+        form = EmailVerificationForm()
     
     else:
-        form = Email_Verification_Form(request.POST or None, request=request)
+        form = EmailVerificationForm(request.POST or None, request=request)
        
         if form.is_valid():
             request.session['email_verified'] = 'True'
@@ -136,10 +136,10 @@ def change_password_email(request):
         return redirect('input_email')
 
     if request.method == "GET":
-        form = Change_Password_Email_Form()
+        form = ChangePasswordEmailForm()
 
     else:
-        form = Change_Password_Email_Form(request.POST)
+        form = ChangePasswordEmailForm(request.POST)
         
         if form.is_valid():
             user = get_object_or_404(User, email=request.session['current_email'])
@@ -167,8 +167,8 @@ def change_password_email(request):
 @login_required(login_url='/account/login')
 def profile(request):
     if request.method == "POST":
-        user_form = User_Form(request.POST, instance=request.user)
-        profile_form = Profile_Form(request.POST, instance=request.user.profile_model, files=request.FILES)
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile_model, files=request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -176,8 +176,8 @@ def profile(request):
             messages.success(request, _('Successfully updated profile information!'))
 
     else:
-        user_form = User_Form(instance=request.user)
-        profile_form = Profile_Form(instance=request.user.profile_model)
+        user_form = UserForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile_model)
 
     return render(request, 'account/profile.html', {
         'profile_form' : profile_form,
@@ -188,10 +188,10 @@ def profile(request):
 @login_required(login_url='/account/login')
 def change_password(request):
     if request.method == "GET":
-        form = Change_Password_Form()
+        form = ChangePasswordForm()
 
     else:
-        form = Change_Password_Form(request.POST)
+        form = ChangePasswordForm(request.POST)
         if form.is_valid():
             user = request.user
             old_password = form.cleaned_data.get('old_password', '')

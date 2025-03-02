@@ -8,9 +8,9 @@ from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 from django.http import JsonResponse
 
-from pdfapp.forms import Contact_Form, Quiz_Form
-from pdfapp.models import Quiz_Model
-from account.models import Profile_Model
+from pdfapp.forms import ContactForm, QuizForm
+from pdfapp.models import QuizModel
+from account.models import ProfileModel
 from utils.quiz import *
 from utils.user import *
 from utils.email import send_contact_mail
@@ -69,7 +69,7 @@ def edit_quiz(request, slug):
             try:
                 first_boundary = int(request.POST.get('slider1', 1))
                 last_boundary = int(request.POST.get('slider2', 2))
-                user_quiz = Quiz_Model.objects.get(user=request.user, slug=slug)
+                user_quiz = QuizModel.objects.get(user=request.user, slug=slug)
 
                 edit_user_quiz(user_quiz, cleaned_data["quiz_name"],
                 cleaned_data["test_number"], cleaned_data["show_number"],
@@ -92,10 +92,10 @@ def edit_quiz(request, slug):
 
 @login_required(login_url="/account/login")
 def delete_quiz(request, slug):
-    quiz = get_object_or_404(Quiz_Model, slug=slug, user=request.user)
+    quiz = get_object_or_404(QuizModel, slug=slug, user=request.user)
     quiz.delete()
 
-    profile = Profile_Model.objects.get(user=request.user)
+    profile = ProfileModel.objects.get(user=request.user)
     profile.current_quiz_number -= 1
     profile.save()
 
@@ -115,7 +115,7 @@ def check_quiz_status(request):
 @login_required(login_url="/account/login")
 def create_quiz(request):
     if request.method == "GET":
-        form = Quiz_Form()
+        form = QuizForm()
 
     else:
         curr_quiz_attempt = check_quiz_attempt(request)
@@ -123,13 +123,13 @@ def create_quiz(request):
             messages.error(request, _('You have uploaded many PDFs recently; please try again {remaining} {minute_text} later!').format(remaining=curr_quiz_attempt[0], minute_text=curr_quiz_attempt[1]))
             return redirect('home')
         
-        profile = get_object_or_404(Profile_Model, user=request.user)
+        profile = get_object_or_404(ProfileModel, user=request.user)
         if profile.current_quiz_number >= 8:
                 messages.error(request,
                     _('The maximum quiz limit for each account is 8!'))
                 return redirect('home')
 
-        form = Quiz_Form(request.POST or None, request.FILES, request=request)
+        form = QuizForm(request.POST or None, request.FILES, request=request)
         if form.is_valid():
             try:
                 update_quiz_attempt(request)
@@ -148,7 +148,7 @@ def create_quiz(request):
 
 @login_required(login_url="/account/login")
 def quiz_choice(request):
-    quizzes = Quiz_Model.objects.filter(user=request.user)
+    quizzes = QuizModel.objects.filter(user=request.user)
     return render(request, 'pdfapp/quiz_choice.html', {
         'quizzes' : quizzes
     })
@@ -175,14 +175,14 @@ def about(request):
 
 def contact(request):
     if request.method == "GET":
-        form = Contact_Form()
+        form = ContactForm()
 
     else:
         if request.session.get('contact_attempt', 0) > 3:
             messages.error(request, _('You have sent too many messages!'))
             return redirect('contact')
         
-        form = Contact_Form(request.POST)
+        form = ContactForm(request.POST)
         if form.is_valid():
             try:
                 send_contact_mail(form.cleaned_data)

@@ -1,10 +1,10 @@
 from django import forms
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.forms import widgets
-from .models import Quiz_Model
+from .models import QuizModel
 from django.utils.translation import gettext_lazy as _
 
-class Contact_Form(forms.Form):
+class ContactForm(forms.Form):
     name = forms.CharField(widget = widgets.TextInput(attrs = {
         'id' : 'name'
     }))
@@ -25,12 +25,12 @@ class Contact_Form(forms.Form):
     }))
 
 
-class Quiz_Form(forms.Form):
+class QuizForm(forms.Form):
     pdf = forms.FileField()
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
-        super(Quiz_Form, self).__init__(*args, **kwargs)
+        super(QuizForm, self).__init__(*args, **kwargs)
 
     quiz_name = forms.CharField(validators = [MaxLengthValidator(30)], max_length = 30, widget = widgets.TextInput(attrs = {
         'id' : 'quizName',
@@ -68,17 +68,17 @@ class Quiz_Form(forms.Form):
     def clean_quiz_name(self):
         quiz_name = self.cleaned_data.get('quiz_name', '')
         if self.request:
-            if Quiz_Model.objects.filter(quiz_name = quiz_name, user = self.request.user).exists():
+            if QuizModel.objects.filter(quiz_name = quiz_name, user = self.request.user).exists():
                 self.add_error('quiz_name', _('The pdf with this name already exists!'))
 
         return quiz_name
 
 
-class Edit_Quiz_Form(forms.Form):
+class EditQuizForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)
         self.max_test_number = kwargs.pop("max_test_number", 1)
-        super(Edit_Quiz_Form, self).__init__(*args, **kwargs)
+        super(EditQuizForm, self).__init__(*args, **kwargs)
         
 
     quiz_name = forms.CharField(validators = [MaxLengthValidator(60)], max_length = 60, widget = widgets.TextInput(attrs = {
@@ -108,7 +108,7 @@ class Edit_Quiz_Form(forms.Form):
         initial_quiz_name = self.initial.get('quiz_name', '')
         if self.request:
             try:
-                if initial_quiz_name != quiz_name and Quiz_Model.objects.filter(quiz_name = quiz_name, user = self.request.user).exists():
+                if initial_quiz_name != quiz_name and QuizModel.objects.filter(quiz_name = quiz_name, user = self.request.user).exists():
                     self.add_error('quiz_name', _('The pdf with this name already exists!'))
             except:
                 pass

@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 
-class Quiz_Model(models.Model):
+class QuizModel(models.Model):
     quiz_name = models.CharField(max_length = 30)
     slug = models.SlugField(max_length = 30, default = '', blank = True, db_index = True)
     test_number = models.IntegerField(default = 0)
@@ -17,7 +17,7 @@ class Quiz_Model(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.quiz_name)
-        super(Quiz_Model, self).save(*args, **kwargs)
+        super(QuizModel, self).save(*args, **kwargs)
 
 
     def __str__ (self):

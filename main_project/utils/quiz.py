@@ -8,8 +8,8 @@ import base64
 from django.core.cache import cache
 from django.shortcuts import render
 
-from pdfapp.models import Quiz_Model
-from pdfapp.forms import Edit_Quiz_Form
+from pdfapp.models import QuizModel
+from pdfapp.forms import EditQuizForm
 from pdfapp.tasks import create_quiz_task
 from utils.session import set_session_with_expiration_json
 
@@ -25,7 +25,7 @@ def get_quiz_settings(request, slug, *keys: tuple):
 
     else:
         try:
-            user_quiz = Quiz_Model.objects.get(user = request.user, slug = slug)
+            user_quiz = QuizModel.objects.get(user = request.user, slug = slug)
             return {key: getattr(user_quiz, key, None) for key in keys}
 
         except Exception as quiz_error:
@@ -45,8 +45,8 @@ def fetch_quiz_settings(request, slug) -> Optional[dict]:
         "last_boundary", "test_number","shuffle_variant", "show_number")
 
 
-def initialize_edit_form(quiz_settings: dict) -> Edit_Quiz_Form:
-    return Edit_Quiz_Form(initial = {
+def initialize_edit_form(quiz_settings: dict) -> EditQuizForm:
+    return EditQuizForm(initial = {
             'quiz_name' : quiz_settings["quiz_name"],
             'test_number' : quiz_settings["test_number"],
             'show_number' : quiz_settings["show_number"],
@@ -66,8 +66,8 @@ def render_quiz_edit_page(request, form, quiz_settings, slug):
     })
 
 
-def process_edit_form(request, quiz_settings: dict) -> Edit_Quiz_Form:
-    return Edit_Quiz_Form(request.POST or None, request = request,
+def process_edit_form(request, quiz_settings: dict) -> EditQuizForm:
+    return EditQuizForm(request.POST or None, request = request,
             max_test_number = quiz_settings["max_test_number"], initial = {
             'quiz_name' : quiz_settings["quiz_name"],
         })
