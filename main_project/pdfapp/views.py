@@ -152,16 +152,14 @@ def create_quiz(request):
 
                 if current_time > expiration_time:
                     del request.session['quiz_attempt']
-                    
-                '''else:
+                
+                else:
                     remaining = (expiration_time - current_time).seconds
-                    remaining //= 60
-                    remaining += 1
-                    minute_text = 'minutes'
-                    if remaining == 1 : minute_text = 'minute'
+                    remaining = (remaining // 60) + 1
+                    minute_text = 'minutes' if remaining != 1 else "minute"
                     messages.error(request, _('You have uploaded many PDFs recently; please try again {remaining} {minute_text} later!').format(remaining = remaining, minute_text = minute_text))
-                    return redirect('home')'''
-            
+                    return redirect('home')
+        
         try:
             profile_model = Profile_Model.objects.get(user = request.user)
             if profile_model.current_quiz_number >= 8:
@@ -172,14 +170,12 @@ def create_quiz(request):
             logger.error(f"Profile Model Error -> {profile_error}")
             return redirect('home')
 
-
         form = Quiz_Form(request.POST or None, request.FILES, request = request)
         if form.is_valid():
             try:
                 slider1 = int(request.POST.get('slider1', 1))
                 slider2 = int(request.POST.get('slider2', 2))
-                
-                
+            
             except:
                 return redirect('quiz_choice')
             
@@ -192,7 +188,6 @@ def create_quiz(request):
             else:
                 quiz_attempt = 0
 
-
             quiz_attempt += 1
             set_session_with_expiration(request, key = 'quiz_attempt', value = quiz_attempt, expiration_minutes = 5)
             
@@ -201,24 +196,18 @@ def create_quiz(request):
                 file_content = uploaded_file.read()
                 base64_content = convert_file_to_base64(file_content)
 
-
                 variant_number = form.cleaned_data.get('variant_number', 0)
                 quiz_name = form.cleaned_data.get('quiz_name', '')
                 test_number = form.cleaned_data.get('test_number', 0)
                 show_number = form.cleaned_data.get('show_number', False)
                 shuffle_variant = form.cleaned_data.get('shuffle_variant', False)
 
-
                 create_quiz_task.delay(request.user.id, base64_content, variant_number, quiz_name, test_number, show_number, shuffle_variant, slider1, slider2)
                 return render(request, "pdfapp/load_page.html")
-            
-
                 
             except Exception:
                 messages.error(request, _('An error occured!'))
                 return redirect('create_quiz')
-            
-
 
     return render(request, 'pdfapp/create_quiz.html', {
         'form' : form
