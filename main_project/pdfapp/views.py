@@ -14,10 +14,11 @@ from django.core.cache import cache
 from django.http import JsonResponse
 
 from pdfapp.tasks import create_quiz_task
-from pdfapp.forms import Contact_Form, Quiz_Form, Edit_Quiz_Form
+from pdfapp.forms import Contact_Form, Quiz_Form
 from pdfapp.models import Quiz_Model
 from account.models import Profile_Model
 from utils.quiz import *
+from utils.user import *
 
 logger = logging.getLogger(__name__)
 
@@ -81,7 +82,7 @@ def edit_quiz(request, slug):
                 first_boundary, last_boundary)
                 
                 edit_user_cache_form(request, slug, quiz_settings, cleaned_data, 
-                                first_boundary, last_boundary)
+                                first_boundary, last_boundary, user_quiz.tests)
             
             except Exception as quiz_edit_error:
                 logger.error(f"Error While Editing Quiz -> {quiz_edit_error}")
