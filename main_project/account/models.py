@@ -16,7 +16,7 @@ class ProfileModel(models.Model):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     try:
-        instance.profile_model.save()
+        instance.profilemodel.save()
         
     except ProfileModel.DoesNotExist:
         ProfileModel.objects.create(user=instance)

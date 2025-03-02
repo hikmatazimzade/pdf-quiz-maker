@@ -168,7 +168,7 @@ def change_password_email(request):
 def profile(request):
     if request.method == "POST":
         user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile_model, files=request.FILES)
+        profile_form = ProfileForm(request.POST, instance=request.user.profilemodel, files=request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -177,7 +177,7 @@ def profile(request):
 
     else:
         user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile_model)
+        profile_form = ProfileForm(instance=request.user.profilemodel)
 
     return render(request, 'account/profile.html', {
         'profile_form' : profile_form,
