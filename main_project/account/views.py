@@ -1,19 +1,21 @@
 from random import randint
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 
 from utils.account import *
 from account.forms import *
 from utils.session import increase_session_value
+from utils.email import send_verification_email
 
+logger = logging.getLogger(__name__)
 
 def login_request(request):
     if request.user.is_authenticated:
@@ -66,19 +68,11 @@ def input_email(request):
         form = Input_Email_Form(request.POST)
         if form.is_valid():
             user_email = form.cleaned_data['email']
-            verification_code =  str(randint(10000, 100000))
-            request.session['verification_code'] = verification_code
-
             try:
-                send_mail(
-                    'Email Verification',
-                    _('Input this code to verify your email') + '\n' + str(verification_code),
-                    'settings.EMAIL_HOST_USER',
-                    [user_email],
-                    fail_silently=False,
-                )
-                
-            except Exception:
+                send_verification_email(user_email, request)
+            
+            except Exception as email_error:
+                logger.error(f"Email Verification Error -> {email_error}")
                 messages.error(request, _('An error occured!'))
                 return render(request, 'account/input_email.html', {
                     'form': form,
@@ -88,7 +82,6 @@ def input_email(request):
             request.session['current_email'] = user_email
             request.session['resend'] = 0
             request.session.set_expiry(5 * 60)
-
             return redirect('email_verification')
 
     return render(request, 'account/input_email.html', {
@@ -168,7 +161,7 @@ def change_password_email(request):
         
         if form.is_valid():
             try:    
-                user = User.objects.get(email = request.session['current_email'])
+                user = User.objects.get(email=request.session['current_email'])
             except:
                 messages.error(request, _('Input your email again!'))
                 return redirect('input_email')
@@ -196,11 +189,11 @@ def change_password_email(request):
     })
 
 
-@login_required(login_url = '/account/login')
+@login_required(login_url='/account/login')
 def profile(request):
     if request.method == "POST":
-        user_form = User_Form(request.POST, instance = request.user)
-        profile_form = Profile_Form(request.POST, instance = request.user.profile_model, files = request.FILES)
+        user_form = User_Form(request.POST, instance=request.user)
+        profile_form = Profile_Form(request.POST, instance=request.user.profile_model, files=request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -208,8 +201,8 @@ def profile(request):
             messages.success(request, _('Successfully updated profile information!'))
 
     else:
-        user_form = User_Form(instance = request.user)
-        profile_form = Profile_Form(instance = request.user.profile_model)
+        user_form = User_Form(instance=request.user)
+        profile_form = Profile_Form(instance=request.user.profile_model)
 
     return render(request, 'account/profile.html', {
         'profile_form' : profile_form,
@@ -217,7 +210,7 @@ def profile(request):
     })
 
 
-@login_required(login_url = '/account/login')
+@login_required(login_url='/account/login')
 def change_password(request):
     if request.method == "GET":
         form = Change_Password_Form()
@@ -243,7 +236,7 @@ def change_password(request):
     })
 
 
-@login_required(login_url = '/account/login')
+@login_required(login_url='/account/login')
 def logout_request(request):
     request.session.flush()
     logout(request)

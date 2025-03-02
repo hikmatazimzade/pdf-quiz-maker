@@ -1,10 +1,9 @@
-import base64
 import logging
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext as _
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 from django.http import JsonResponse
