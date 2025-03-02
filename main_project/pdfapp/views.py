@@ -1,6 +1,4 @@
-import json
 import base64
-from datetime import datetime, timedelta
 import logging
 
 from django.shortcuts import render, redirect
@@ -8,7 +6,6 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
-from django.core.serializers.json import DjangoJSONEncoder
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 from django.http import JsonResponse
@@ -112,17 +109,6 @@ def delete_quiz(request, slug):
     return redirect('quiz_choice')
 
 
-def set_session_with_expiration(request, key, value, expiration_minutes):
-    expiration_time = datetime.now() + timedelta(minutes = expiration_minutes)
-    
-    data_to_store = {
-        'value': value,
-        'expiration_time': expiration_time
-    }
-    
-    request.session[key] = json.dumps(data_to_store, cls=DjangoJSONEncoder)
-
-
 def convert_file_to_base64(file_content):
     return base64.b64encode(file_content).decode('utf-8')
 
@@ -143,26 +129,13 @@ def create_quiz(request):
         form = Quiz_Form()
 
     else:
-        quiz_attempt = request.session.get('quiz_attempt', None)
-        if quiz_attempt:
-            quiz_attempt = json.loads(quiz_attempt)
-            
-            if quiz_attempt.get('value', 0) > 5:
-                current_time = datetime.now()
-                expiration_time = datetime.fromisoformat(quiz_attempt.get('expiration_time', str(current_time)))
-
-                if current_time > expiration_time:
-                    del request.session['quiz_attempt']
-                
-                else:
-                    remaining = (expiration_time - current_time).seconds
-                    remaining = (remaining // 60) + 1
-                    minute_text = 'minutes' if remaining != 1 else "minute"
-                    messages.error(request, _('You have uploaded many PDFs recently; please try again {remaining} {minute_text} later!').format(remaining = remaining, minute_text = minute_text))
-                    return redirect('home')
+        curr_quiz_attempt = check_quiz_attempt(request)
+        if isinstance(curr_quiz_attempt, tuple):
+            messages.error(request, _('You have uploaded many PDFs recently; please try again {remaining} {minute_text} later!').format(remaining = curr_quiz_attempt[0], minute_text = curr_quiz_attempt[1]))
+            return redirect('home')
         
         try:
-            profile_model = Profile_Model.objects.get(user = request.user)
+            profile_model = Profile_Model.objects.get(user=request.user)
             if profile_model.current_quiz_number >= 8:
                 messages.error(request, _('The maximum quiz limit for each account is 8!'))
                 return redirect('home')
@@ -171,42 +144,15 @@ def create_quiz(request):
             logger.error(f"Profile Model Error -> {profile_error}")
             return redirect('home')
 
-        form = Quiz_Form(request.POST or None, request.FILES, request = request)
+        form = Quiz_Form(request.POST or None, request.FILES, request=request)
         if form.is_valid():
             try:
-                slider1 = int(request.POST.get('slider1', 1))
-                slider2 = int(request.POST.get('slider2', 2))
-            
-            except:
-                return redirect('quiz_choice')
-            
-            
-            attempt = request.session.get('quiz_attempt', 0)
-            
-            if attempt:
-                quiz_attempt = json.loads(attempt).get('value', 0)
-
-            else:
-                quiz_attempt = 0
-
-            quiz_attempt += 1
-            set_session_with_expiration(request, key = 'quiz_attempt', value = quiz_attempt, expiration_minutes = 5)
-            
-            try:
-                uploaded_file = request.FILES['pdf']
-                file_content = uploaded_file.read()
-                base64_content = convert_file_to_base64(file_content)
-
-                variant_number = form.cleaned_data.get('variant_number', 0)
-                quiz_name = form.cleaned_data.get('quiz_name', '')
-                test_number = form.cleaned_data.get('test_number', 0)
-                show_number = form.cleaned_data.get('show_number', False)
-                shuffle_variant = form.cleaned_data.get('shuffle_variant', False)
-
-                create_quiz_task.delay(request.user.id, base64_content, variant_number, quiz_name, test_number, show_number, shuffle_variant, slider1, slider2)
+                update_quiz_attempt(request)
+                send_quiz_celery(request, form.cleaned_data)
                 return render(request, "pdfapp/load_page.html")
-                
-            except Exception:
+            
+            except Exception as create_error:
+                logger.error(f"Quiz Creation Error -> {create_error}")
                 messages.error(request, _('An error occured!'))
                 return redirect('create_quiz')
 

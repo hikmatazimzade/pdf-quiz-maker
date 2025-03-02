@@ -1,0 +1,15 @@
+2025-03-02 11:52:22,537 - WARNING - Not Found: /favicon.ico
+2025-03-02 11:52:22,538 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 11:52:29,555 - WARNING - Not Found: /favicon.ico
+2025-03-02 11:52:29,556 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 11:52:35,018 - WARNING - Not Found: /favicon.ico
+2025-03-02 11:52:35,018 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 11:52:39,589 - WARNING - Not Found: /favicon.ico
+2025-03-02 11:52:39,590 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 12:11:04,332 - ERROR - Quiz Creation Error -> name 'slider1' is not defined
+2025-03-02 12:12:04,497 - WARNING - Not Found: /favicon.ico
+2025-03-02 12:12:04,498 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 12:12:08,977 - WARNING - Not Found: /favicon.ico
+2025-03-02 12:12:08,977 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 12:18:30,117 - WARNING - Not Found: /favicon.ico
+2025-03-02 12:18:30,118 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550

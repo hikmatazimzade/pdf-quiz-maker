@@ -1,13 +1,17 @@
 from typing import List, Optional
+from datetime import datetime
 from random import shuffle
 import logging
 import json
+import base64
 
 from django.core.cache import cache
 from django.shortcuts import render
 
 from pdfapp.models import Quiz_Model
 from pdfapp.forms import Edit_Quiz_Form
+from pdfapp.tasks import create_quiz_task
+from utils.session import set_session_with_expiration
 
 logger = logging.getLogger(__name__)
 
@@ -125,3 +129,57 @@ def shuffle_quiz_data(quiz_data: List[dict], test_number: int) -> None:
 
         quiz_data[i]['answers'] = answers
         quiz_data[i]['correctAnswer'] = new_correct_answer
+
+
+def check_quiz_attempt(request) -> Optional[tuple[int, str]]:
+    quiz_attempt = request.session.get('quiz_attempt', None)
+    if quiz_attempt:
+        quiz_attempt = json.loads(quiz_attempt)
+        
+        if quiz_attempt.get('value', 0) > 5:
+            current_time = datetime.now()
+            expiration_time = datetime.fromisoformat(quiz_attempt.get('expiration_time', str(current_time)))
+
+            if current_time > expiration_time:
+                del request.session['quiz_attempt']
+            
+            else:
+                remaining = (expiration_time - current_time).seconds
+                remaining = (remaining // 60) + 1
+                minute_text = 'minutes' if remaining != 1 else "minute"
+                return remaining, minute_text
+
+
+def update_quiz_attempt(request) -> None:
+    attempt = request.session.get('quiz_attempt', 0)
+    if attempt:
+        quiz_attempt = json.loads(attempt).get('value', 0)
+
+    else:
+        quiz_attempt = 0
+
+    quiz_attempt += 1
+    set_session_with_expiration(request, key = 'quiz_attempt', value=quiz_attempt, expiration_minutes=5)
+
+
+def convert_file_to_base64(file_content):
+    return base64.b64encode(file_content).decode('utf-8')
+
+
+def send_quiz_celery(request, cleaned_data: dict):
+    first_boundary = int(request.POST.get('slider1', 1))
+    last_boundary = int(request.POST.get('slider2', 2))
+    
+    uploaded_file = request.FILES['pdf']
+    file_content = uploaded_file.read()
+    base64_content = convert_file_to_base64(file_content)
+
+    variant_number = cleaned_data.get('variant_number', 0)
+    quiz_name = cleaned_data.get('quiz_name', '')
+    test_number = cleaned_data.get('test_number', 0)
+    show_number = cleaned_data.get('show_number', False)
+    shuffle_variant = cleaned_data.get('shuffle_variant', False)
+
+    create_quiz_task.delay(request.user.id, base64_content, variant_number,
+                    quiz_name, test_number, show_number, 
+                    shuffle_variant, first_boundary, last_boundary)
