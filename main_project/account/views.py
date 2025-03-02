@@ -95,12 +95,10 @@ def email_verification(request):
         messages.error(request, _('Verification code expired!'))
         return redirect('input_email')
     
-
     if request.session.get('verification_attempt', 0) > 3:
         messages.error(request, _('Try again later!'))
         return redirect('home')
     
-
     if request.method == "GET":
         form = Email_Verification_Form()
     
@@ -111,7 +109,6 @@ def email_verification(request):
             request.session['email_verified'] = 'True'
             request.session['resend'] = 0
             return redirect('change_password_email')
-
 
     return render(request, 'account/email_verification.html', {
         'form' : form
@@ -124,27 +121,14 @@ def resend_code(request):
         return redirect('email_verification')
 
     user_email = request.session.get('current_email', '')
-    verification_code =  str(randint(10000, 100000))
-    
-    request.session['verification_code'] = verification_code
-
     try:
-        send_mail(
-            'Email Verification',
-            _('Input this code to verify your email') + '\n' + str(verification_code),
-            'settings.EMAIL_HOST_USER',
-            [user_email],
-            fail_silently=False,
-        )
+        send_verification_email(user_email, request)
         
     except Exception:
         messages.error(request, _('An error occured!'))
         return redirect('input_email')
     
-    resend = request.session.get('resend', 0)
-    resend += 1
-    request.session['resend'] = resend
-
+    increase_session_value(request, "resend")
     return redirect('email_verification')
 
 
