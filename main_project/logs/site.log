@@ -226,3 +226,27 @@ django.db.utils.OperationalError: no such table: quizzes
 2025-03-02 18:15:23,687 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
 2025-03-02 18:15:25,185 - WARNING - Not Found: /favicon.ico
 2025-03-02 18:15:25,185 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:06,057 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:06,058 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:06,062 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:06,062 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:08,183 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:08,184 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:09,135 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:09,136 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:11,061 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:11,061 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:12,116 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:12,116 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:14,235 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:14,235 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:16,225 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:16,225 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:18,100 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:18,100 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:23,113 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:23,114 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:25,216 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:25,216 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 23:25:26,819 - WARNING - Not Found: /favicon.ico
+2025-03-02 23:25:26,819 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550

@@ -14,6 +14,7 @@ from account.models import ProfileModel
 from utils.quiz import *
 from utils.user import *
 from utils.email import send_contact_mail
+from utils.session import increase_session_value
 
 logger = logging.getLogger(__name__)
 
@@ -101,6 +102,7 @@ def delete_quiz(request, slug):
 
     messages.success(request, _('Quiz successfully deleted!'))
     return redirect("quiz_choice")
+
 
 @login_required(login_url="/account/login")
 def check_quiz_status(request):
@@ -193,9 +195,7 @@ def contact(request):
                 messages.error(request, _('An error occured!'))
                 return redirect('contact')
             
-            contact_attempt = request.session.get('contact_attempt', 0)
-            request.session['contact_attempt'] = contact_attempt + 1
-            
+            increase_session_value(request, 'contact_attempt')            
             return redirect('contact')
 
     return render(request, 'pdfapp/contact.html', {
