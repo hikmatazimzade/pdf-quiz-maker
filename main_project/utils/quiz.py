@@ -65,6 +65,7 @@ def render_quiz_edit_page(request, form, quiz_settings, slug):
         'last_boundary' : quiz_settings["last_boundary"]
     })
 
+
 def process_edit_form(request, quiz_settings: dict) -> Edit_Quiz_Form:
     return Edit_Quiz_Form(request.POST or None, request = request,
             max_test_number = quiz_settings["max_test_number"], initial = {
