@@ -1,6 +1,4 @@
-from random import randint
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -144,18 +142,12 @@ def change_password_email(request):
         form = Change_Password_Email_Form(request.POST)
         
         if form.is_valid():
-            try:    
-                user = User.objects.get(email=request.session['current_email'])
-            except:
-                messages.error(request, _('Input your email again!'))
-                return redirect('input_email')
-            
+            user = get_object_or_404(User, email=request.session['current_email'])
             password1 = form.cleaned_data['password1']
 
             if user.check_password(password1):
                 messages.info(request, _("The new password can't be same with the previous one!"))
-                return redirect('login')
-                
+                return redirect('login')                
 
             if 'email_verified' in request.session:
                 del request.session['email_verified']
@@ -163,7 +155,6 @@ def change_password_email(request):
             request.session['resend'] = 0
             user.set_password(password1)
             user.save()
-
 
             messages.success(request, _('Your password was successfully updated!'))
             return redirect('login')
