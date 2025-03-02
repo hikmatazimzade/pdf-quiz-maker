@@ -50,7 +50,7 @@ def create_quiz_task(cur_id, base64_content, variant_number, quiz_name, test_num
         quiz_model_instance.save()
 
 
-        profile_model = ProfileModel.objects.get(user__id = cur_id)
+        profile_model = ProfileModel.objects.get(user__id=cur_id)
         profile_model.current_quiz_number += 1
         profile_model.save()
         

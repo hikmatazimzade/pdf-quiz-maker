@@ -25,7 +25,7 @@ def get_quiz_settings(request, slug, *keys: tuple):
 
     else:
         try:
-            user_quiz = QuizModel.objects.get(user = request.user, slug = slug)
+            user_quiz = QuizModel.objects.get(user=request.user, slug=slug)
             return {key: getattr(user_quiz, key, None) for key in keys}
 
         except Exception as quiz_error:

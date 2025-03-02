@@ -1,8 +1,11 @@
 from django import forms
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.forms import widgets
-from .models import QuizModel
 from django.utils.translation import gettext_lazy as _
+from django.utils.text import slugify
+
+from pdfapp.models import QuizModel
+
 
 class ContactForm(forms.Form):
     name = forms.CharField(widget = widgets.TextInput(attrs = {
@@ -64,11 +67,11 @@ class QuizForm(forms.Form):
     }))
 
 
-
     def clean_quiz_name(self):
         quiz_name = self.cleaned_data.get('quiz_name', '')
         if self.request:
-            if QuizModel.objects.filter(quiz_name = quiz_name, user = self.request.user).exists():
+            slug = slugify(quiz_name)
+            if QuizModel.objects.filter(slug=slug, user=self.request.user).exists():
                 self.add_error('quiz_name', _('The pdf with this name already exists!'))
 
         return quiz_name
@@ -108,7 +111,9 @@ class EditQuizForm(forms.Form):
         initial_quiz_name = self.initial.get('quiz_name', '')
         if self.request:
             try:
-                if initial_quiz_name != quiz_name and QuizModel.objects.filter(quiz_name = quiz_name, user = self.request.user).exists():
+                slug = slugify(quiz_name)
+                if initial_quiz_name != quiz_name and QuizModel.objects.filter(slug=slug,
+                                                                    user=self.request.user).exists():
                     self.add_error('quiz_name', _('The pdf with this name already exists!'))
             except:
                 pass
