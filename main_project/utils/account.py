@@ -1,8 +1,10 @@
 from typing import Optional
+import logging
 
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 
+logger = logging.getLogger(__name__)
 
 def handle_user_login(cleaned_data: dict, request) -> Optional[str]:
     email = cleaned_data['email']
@@ -25,3 +27,23 @@ def handle_user_login(cleaned_data: dict, request) -> Optional[str]:
 
         next_url = request.GET.get('next', 'home')
         return next_url
+
+
+def handle_user_register(cleaned_data: dict, request) -> bool:
+    try:
+        first_name = cleaned_data['first_name']
+        last_name = cleaned_data['last_name']
+        username = cleaned_data['username']
+        email = cleaned_data['email']
+        password = cleaned_data['password1']
+
+        User.objects.create_user(first_name=first_name, last_name=last_name,
+                            username=username, email=email, password=password)
+        
+        user = authenticate(request, username = username, password = password)
+        login(request, user)
+        return True
+
+    except Exception as register_error:
+        logger.error(f"Register Error -> {register_error}")
+        return False

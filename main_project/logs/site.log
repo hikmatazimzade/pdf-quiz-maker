@@ -19,3 +19,16 @@
 2025-03-02 15:04:43,587 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
 2025-03-02 15:04:43,621 - WARNING - Not Found: /favicon.ico
 2025-03-02 15:04:43,621 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550
+2025-03-02 16:32:09,526 - ERROR - Internal Server Error: /az/account/register
+Traceback (most recent call last):
+  File "C:\Users\hikme\Desktop\Programming Projects\Side Projects\websites-projects\pdf-quiz-maker\myvenv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\hikme\Desktop\Programming Projects\Side Projects\websites-projects\pdf-quiz-maker\myvenv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\hikme\Desktop\Programming Projects\Side Projects\websites-projects\pdf-quiz-maker\main_project\account\views.py", line 52, in register
+    if form.is_valid() and handle_user_register(form.cleaned_data):
+                           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+TypeError: handle_user_register() missing 1 required positional argument: 'request'
+2025-03-02 16:32:09,528 - ERROR - "POST /az/account/register HTTP/1.1" 500 70662
+2025-03-02 16:32:09,782 - WARNING - Not Found: /favicon.ico
+2025-03-02 16:32:09,782 - WARNING - "GET /favicon.ico HTTP/1.1" 404 2550

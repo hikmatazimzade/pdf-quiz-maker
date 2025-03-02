@@ -49,19 +49,8 @@ def register(request):
     
     else:
         form = Register_Form(request.POST)
-
-        if form.is_valid():
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password1']
-
-            User.objects.create_user(first_name = first_name, last_name = last_name, username = username, email = email, password = password)
-            
-            user = authenticate(request, username = username, password = password)
-            login(request, user)
-            messages.success(request, _('Successfully logged in!'))
+        if form.is_valid() and handle_user_register(form.cleaned_data, request):
+            messages.success(request, _('Successfully Registered!'))
             return redirect('home')
 
     return render(request, 'account/register.html', {

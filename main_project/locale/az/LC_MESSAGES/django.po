@@ -114,6 +114,9 @@ msgstr "Daha sonra yenidən cəhd edin!"
 msgid "Successfully Logged in!"
 msgstr "Uğurla giriş edildi"
 
+msgid "Successfully Registered!"
+msgstr "Uğurla qeydiyyatdan keçildi!"
+
 #: .\account\views.py:62
 msgid "Email or password is wrong!"
 msgstr "E-poçt və ya parol səhvdir!"
