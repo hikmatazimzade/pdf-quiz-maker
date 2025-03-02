@@ -2,7 +2,6 @@ import base64
 import logging
 
 from django.shortcuts import render, redirect
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
@@ -16,6 +15,7 @@ from pdfapp.models import Quiz_Model
 from account.models import Profile_Model
 from utils.quiz import *
 from utils.user import *
+from utils.email import send_contact_mail
 
 logger = logging.getLogger(__name__)
 
@@ -137,7 +137,8 @@ def create_quiz(request):
         try:
             profile_model = Profile_Model.objects.get(user=request.user)
             if profile_model.current_quiz_number >= 8:
-                messages.error(request, _('The maximum quiz limit for each account is 8!'))
+                messages.error(request,
+                    _('The maximum quiz limit for each account is 8!'))
                 return redirect('home')
 
         except Exception as profile_error:
@@ -199,19 +200,8 @@ def contact(request):
         
         form = Contact_Form(request.POST)
         if form.is_valid():
-            name = form.cleaned_data.get('name', '')
-            user_email = form.cleaned_data.get('email', '')
-            subject = form.cleaned_data.get('subject', '')
-            message = form.cleaned_data.get('message', '')
-            
             try:
-                send_mail(
-                    'Pdf Quiz Maker Contact Message',
-                    f'User name: {name}\n Email: {user_email}\nSubject: {subject}\nMessage: {message}',
-                    'settings.EMAIL_HOST_USER',
-                    ['youremail@email.com'],
-                    fail_silently=False,
-                )
+                send_contact_mail(form.cleaned_data)
                 messages.success(request, _("Your message was successfully sent!"))
             
             except Exception as email_error:
@@ -221,7 +211,6 @@ def contact(request):
             
             contact_attempt = request.session.get('contact_attempt', 0)
             request.session['contact_attempt'] = contact_attempt + 1
-
             
             return redirect('contact')
 
