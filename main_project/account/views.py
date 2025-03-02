@@ -1,16 +1,18 @@
+from random import randint
+
 from django.shortcuts import render, redirect
-from .forms import Login_Form, Register_Form, Input_Email_Form, Email_Verification_Form, Change_Password_Email_Form, Profile_Form, User_Form, Change_Password_Form
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.mail import send_mail
-from random import randint
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.utils.translation import gettext_lazy as _
 
-# Create your views here.
+from utils.account import *
+from account.forms import *
+from utils.session import increase_session_value
 
 
 def login_request(request):
@@ -27,40 +29,14 @@ def login_request(request):
     
     else:
         form = Login_Form(request.POST)
-    
         if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
+            next_url = handle_user_login(form.cleaned_data, request)
+            if next_url:        
+                messages.success(request, _('Successfully Logged in!'))
+                return redirect(next_url)
             
-            if User.objects.filter(email = email).exists():
-                username = User.objects.get(email = email).username
-                user = authenticate(request, username = username, password = password)
-
-                if user is not None:
-                    remember_me = form.cleaned_data['remember_me']
-                    
-                    if remember_me:
-                        request.session.set_expiry(365 * 86400)
-                    else:
-                        request.session.set_expiry(0)
-
-                    
-                    login(request, user)
-                    request.session['login_attempt'] = 0
-                    messages.success(request, _('Successfully Logged in!'))
-
-                    next_url = request.GET.get('next', 'home')
-
-                    return redirect(next_url)
-            
-            login_attempt = request.session.get('login_attempt', 0)
-            login_attempt += 1
-            request.session['login_attempt'] = login_attempt
-            request.session.set_expiry(10 * 60)
-
-            
-            messages.error(request, _("Email or password is wrong!"))
-
+            increase_session_value(request, "login_attempt", 10)
+            messages.warning(request, _("Email or password is wrong!"))
 
     return render(request, 'account/login.html', {
         'form' : form
@@ -103,7 +79,6 @@ def input_email(request):
             user_email = form.cleaned_data['email']
             verification_code =  str(randint(10000, 100000))
             request.session['verification_code'] = verification_code
-
 
             try:
                 send_mail(
@@ -251,7 +226,7 @@ def profile(request):
         'profile_form' : profile_form,
         'user_form' : user_form
     })
-        
+
 
 @login_required(login_url = '/account/login')
 def change_password(request):

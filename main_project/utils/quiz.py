@@ -11,7 +11,7 @@ from django.shortcuts import render
 from pdfapp.models import Quiz_Model
 from pdfapp.forms import Edit_Quiz_Form
 from pdfapp.tasks import create_quiz_task
-from utils.session import set_session_with_expiration
+from utils.session import set_session_with_expiration_json
 
 logger = logging.getLogger(__name__)
 
@@ -160,7 +160,8 @@ def update_quiz_attempt(request) -> None:
         quiz_attempt = 0
 
     quiz_attempt += 1
-    set_session_with_expiration(request, key = 'quiz_attempt', value=quiz_attempt, expiration_minutes=5)
+    set_session_with_expiration_json(request, key = 'quiz_attempt',
+                    value=quiz_attempt, expiration_minutes=5)
 
 
 def convert_file_to_base64(file_content):
