@@ -1,7 +1,7 @@
 import base64
 import logging
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
@@ -9,7 +9,6 @@ from django.views.decorators.cache import cache_page
 from django.core.cache import cache
 from django.http import JsonResponse
 
-from pdfapp.tasks import create_quiz_task
 from pdfapp.forms import Contact_Form, Quiz_Form
 from pdfapp.models import Quiz_Model
 from account.models import Profile_Model
@@ -94,19 +93,15 @@ def edit_quiz(request, slug):
 
 @login_required(login_url = '/account/login')
 def delete_quiz(request, slug):
-    try:
-        Quiz_Model.objects.get(slug = slug, user = request.user).delete()
+    quiz = get_object_or_404(Quiz_Model, slug=slug, user=request.user)
+    quiz.delete()
 
-        profile_model = Profile_Model.objects.get(user = request.user)
-        profile_model.current_quiz_number -= 1
-        profile_model.save()
+    profile = Profile_Model.objects.get(user = request.user)
+    profile.current_quiz_number -= 1
+    profile.save()
 
-        messages.success(request, _('Quiz successfully deleted!'))
-    except Exception as delete_quiz_error:
-        logger.error(f"Quiz Deleting Error -> {delete_quiz_error}")
-        messages.error(request, _("This quiz doesn't exist!"))
-
-    return redirect('quiz_choice')
+    messages.success(request, _('Quiz successfully deleted!'))
+    return redirect("quiz_choice")
 
 
 def convert_file_to_base64(file_content):
