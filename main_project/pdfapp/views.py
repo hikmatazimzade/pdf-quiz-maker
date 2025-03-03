@@ -122,7 +122,11 @@ def create_quiz(request):
     else:
         curr_quiz_attempt = check_quiz_attempt(request)
         if isinstance(curr_quiz_attempt, tuple):
-            messages.error(request, _('You have uploaded many PDFs recently; please try again {remaining} {minute_text} later!').format(remaining=curr_quiz_attempt[0], minute_text=curr_quiz_attempt[1]))
+            messages.error(request, _(
+                'You have uploaded many PDFs recently; please try again '
+                '{remaining} {minute_text} later!').format(
+                    remaining=curr_quiz_attempt[0],
+                    minute_text=curr_quiz_attempt[1]))
             return redirect('home')
         
         profile = get_object_or_404(ProfileModel, user=request.user)
@@ -191,7 +195,9 @@ def contact(request):
                 messages.success(request, _("Your message was successfully sent!"))
             
             except Exception as email_error:
-                logger.error(f"An Error Occured While Sending Email -> {email_error}")
+                logger.error(
+                    f"An Error Occured While Sending Email -> {email_error}"
+                    )
                 messages.error(request, _('An error occured!'))
                 return redirect('contact')
             

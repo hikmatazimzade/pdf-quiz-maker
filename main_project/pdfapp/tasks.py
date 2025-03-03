@@ -1,39 +1,49 @@
-from celery import shared_task
-from django.core.cache import cache
-from django.utils.text import slugify
-import fitz
-from .models import QuizModel
-from account.models import ProfileModel
+from typing import List, Optional
 import json
 import base64
+import logging
+
+from django.core.cache import cache
+from django.utils.text import slugify
+from celery import shared_task
+import fitz
+
+from account.models import ProfileModel
+from pdfapp.models import QuizModel
+
+logger = logging.getLogger(__name__)
 
 
 @shared_task
-def create_quiz_task(cur_id, base64_content, variant_number, quiz_name, test_number, show_number, shuffle_variant, slider1, slider2):
+def create_quiz_task(curr_id: int, base64_content: base64,
+        variant_number: int,quiz_name: str, test_number: int,
+        show_number: bool, shuffle_variant: bool, slider1: int, slider2: int):
     file_open = True
     try:
         file_content = base64.b64decode(base64_content.encode('utf-8'))
-        doc = fitz.open(stream = file_content, filetype = "pdf")
-        pdf_quiz = save_tests(doc = doc, variant_number = variant_number, slider1 = slider1, slider2 = slider2)
+        doc = fitz.open(stream=file_content, filetype="pdf")
+        pdf_quiz = save_tests(doc=doc, variant_number=variant_number,
+                            slider1=slider1, slider2=slider2)
+        
         doc.close()
         file_open = False
-
 
         length = len(pdf_quiz)
         serialized_data = serialize_quiz_data(pdf_quiz)
 
-
         if test_number > length:
             error_message = "There are not this many tests in this pdf!"
-            cache.set(f"cre_stat_{cur_id}", {"status" : "error", "message" : error_message}, 10)
+            cache.set(f"cre_stat_{curr_id}", {"status" : "error", "message" : error_message}, 10)
             return None
 
-
-
-        quiz_model_instance = QuizModel(quiz_name = quiz_name, test_number = test_number, max_test_number = length, first_boundary = 1, last_boundary = length, show_number = show_number, shuffle_variant = shuffle_variant, tests = serialized_data, user_id = cur_id)
-        slug = slugify(quiz_name)
-        cache_name = str(cur_id) + slug
+        quiz_model_instance = QuizModel(quiz_name=quiz_name, test_number=test_number,
+                        max_test_number=length, first_boundary=1,
+                        last_boundary=length, show_number=show_number,
+                        shuffle_variant=shuffle_variant,
+                        tests=serialized_data, user_id=curr_id)
         
+        slug = slugify(quiz_name)
+        cache_name = str(curr_id) + slug
         
         cache.set(cache_name, {
             "slug" : slug,
@@ -45,51 +55,57 @@ def create_quiz_task(cur_id, base64_content, variant_number, quiz_name, test_num
             "show_number" : show_number,
             "shuffle_variant" : shuffle_variant,
             "tests" : serialized_data,
-            "id" : cur_id
+            "id" : curr_id
         }, 3600)
         quiz_model_instance.save()
 
-
-        profile_model = ProfileModel.objects.get(user__id=cur_id)
+        profile_model = ProfileModel.objects.get(user__id=curr_id)
         profile_model.current_quiz_number += 1
         profile_model.save()
         
-        cache.set(f"cre_stat_{cur_id}", {"status" : "success"}, 10)
+        cache.set(f"cre_stat_{curr_id}", {"status" : "success"}, 10)
         return None
-        
-    except:
+    
+    except Exception as quiz_celery_error:
+        logger.error(f"Quiz Create Celery Error -> {quiz_celery_error}")
         if file_open:
             doc.close()
 
         error_message = "An error occured!"
-        cache.set(f"cre_stat_{cur_id}", {"status" : "error", "message" : error_message}, 10)
+        cache.set(f"cre_stat_{curr_id}", {"status" : "error", "message" : error_message}, 10)
         return None
 
 
-def get_variants(variant_number):
-    if variant_number == 4 : return ('A)', 'B)', 'C)', 'D)')
-    elif variant_number == 5 : return ('A)', 'B)', 'C)', 'D)', 'E)')
-    elif variant_number == 6 : return ('A)', 'B)', 'C)', 'D)', 'E)', 'F)')
+def get_variants(variant_number: int)-> tuple:
+    if variant_number == 4:
+        return ('A)', 'B)', 'C)', 'D)')
+    elif variant_number == 5:
+        return ('A)', 'B)', 'C)', 'D)', 'E)')
+    else:
+        return ('A)', 'B)', 'C)', 'D)', 'E)', 'F)')
 
 
-
-def get_questions_tests(page_text, questions, tests, variants, current, last_variant) -> tuple:
+def get_questions_tests(page_text: fitz, 
+            questions: List[str], tests: List[str],
+            variants: List[str], current,last_variant: bool) -> tuple:
     for line in page_text.split('\n'):
         line = line.strip()
         if line != '':
-            if (len(line) >= 2) and (line[0].isdigit() or line[1].isdigit()) and last_variant:
+            if (len(line) >= 2) and (line[0].isdigit() or \
+                                     line[1].isdigit()) and last_variant:
                 questions.append(line)    
                 current = True
                 last_variant = False
-                
 
-            elif variants[0] in line or variants[1] in line or variants[2] in line or variants[3] in line or \
-                    variants[-1] in line or variants[-2] in line:
+            elif any(
+                variant in line
+                for variant in (variants[0], variants[1],
+                    variants[2], variants[3], variants[-1], variants[-2])
+                    ):
                 tests.append(line)
                 if variants[-1] in line:
                     last_variant = True
                 current = False
-
 
             else:
                 if current:
@@ -100,7 +116,8 @@ def get_questions_tests(page_text, questions, tests, variants, current, last_var
     return current, last_variant
 
 
-def get_answers(annotations, answers, page, variants, last_rect) -> tuple:
+def get_answers(annotations: fitz, answers: List[str], page: fitz,
+    variants: List[str], last_rect: Optional[fitz.open]) -> tuple:
     for annotation in annotations:
         if annotation and annotation.type[0] == 8:
             rect = annotation.rect
@@ -109,11 +126,12 @@ def get_answers(annotations, answers, page, variants, last_rect) -> tuple:
                 continue
 
             try:
-                extracted_text = page.get_text("text", clip = rect).replace('\n', '')
-                if variants[0] in extracted_text or variants[1] in extracted_text or variants[
-                    2] in extracted_text or variants[3] in extracted_text or variants[-1] in extracted_text or \
-                        variants[-2] in extracted_text:
-                    
+                extracted_text = page.get_text("text", clip=rect). \
+                        replace('\n', '')
+                if variants[0] in extracted_text or variants[1] in \
+                extracted_text or variants[2] in extracted_text or \
+                variants[3] in extracted_text or variants[-1] in \
+                extracted_text or variants[-2] in extracted_text:
                     answers.append(extracted_text)
 
                 else:
@@ -128,7 +146,8 @@ def get_answers(annotations, answers, page, variants, last_rect) -> tuple:
     return last_rect
 
 
-def get_dict(questions, tests, answers, variant_number, variants):
+def get_dict(questions: List[str], tests: List[str], answers: List[str],
+variant_number: List[str], variants: List[str]) -> List[dict]:
     pdf_quiz = []
 
     for i in range((len(answers))):
@@ -152,7 +171,8 @@ def get_dict(questions, tests, answers, variant_number, variants):
     return pdf_quiz
 
 
-def save_tests(doc, variant_number, slider1, slider2):
+def save_tests(doc: fitz.open, variant_number: int,
+               slider1: int, slider2: int) -> List[dict]:
     questions, tests, answers = [], [], []
     variants = get_variants(variant_number)
 
@@ -161,21 +181,21 @@ def save_tests(doc, variant_number, slider1, slider2):
     
     for page in doc:
         page_text = page.get_text('text')
-        current, last_variant = get_questions_tests(page_text, questions, tests, variants, current,
-                                                    last_variant)
+        current, last_variant = get_questions_tests(page_text, questions,
+        tests, variants, current, last_variant)
 
         annotations = page.annots()
-        annotations = sorted(annotations, key=lambda annot: annot.rect.y0 if annot.type[0] == 8 else float('inf'))
+        annotations = sorted(annotations, key=lambda annot: annot.rect.y0 \
+        if annot.type[0] == 8 else float('inf'))
 
         if annotations:
             last_rect = get_answers(annotations, answers, page, variants, last_rect)
 
-
     questions, tests, answers = tuple(questions), tuple(tests), tuple(answers)
 
-    pdf_quiz = get_dict(questions, tests, answers, variant_number, variants)[slider1 - 1: slider2 - 1]
+    pdf_quiz = get_dict(questions, tests, answers, variant_number, \
+    variants)[slider1 - 1:slider2 - 1]
     return pdf_quiz
-
 
 
 def serialize_quiz_data(quiz_data):
