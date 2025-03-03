@@ -1,5 +1,5 @@
 from locust import HttpUser, task, between, SequentialTaskSet
-#locust -f pdfapp/locusfile.py --host=https://pdfquizmaker.com
+#locust -f pdfapp/locusfile.py --host=https://localhost.com
 #1200 200
 class UserBehavior(SequentialTaskSet):
     @task(1)
