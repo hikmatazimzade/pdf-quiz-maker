@@ -1,9 +1,0 @@
-.bg-gradient-primary {
-    width: 100%; /* or max-width: 100%; */
-    box-sizing: border-box;
-    background: linear-gradient(90deg, #0093E9 0%, #80D0C7 100%);
-  }
-
-.field_class{
-  margin-bottom: 2vh;
-}
