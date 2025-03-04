@@ -1,0 +1,59 @@
+.quiz-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.quiz-box {
+  box-sizing: border-box;
+  border: 1px solid #ececec; /* Softer border color */
+  border-radius: 8px;
+  padding: 20px;
+  width: calc(45% - 40px); /* Adjusted for margin */
+  text-align: center;
+  margin: 20px; /* Consistent spacing between cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.quiz-box:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+}
+
+.quiz-box h2 {
+  font-size: 1.25em; /* Larger font for quiz name */
+  font-weight: bold; /* Bold for importance */
+  margin-bottom: 0.5em; /* Spacing after title */
+}
+
+.quiz-box h3 {
+  font-size: 1em;
+  color: #666; /* Softer color for less important info */
+  margin-bottom: 1em; /* Consistent spacing */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Primary button color */
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: white;
+  text-transform: uppercase; /* Stylistic choice for buttons */
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Button shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Darker on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+}
+
+/* Responsive Design: Adjust for smaller screens */
+@media screen and (max-width: 600px) {
+  .quiz-box {
+    width: calc(100% - 40px); /* Full width with padding on small screens */
+    margin: 20px; /* Consistent margin */
+  }
+}

@@ -1,0 +1,19 @@
+html {
+    height: 100%;
+  }
+  
+body {
+    margin: 0;
+    height: 100%;
+    background: #6a11cb;
+    background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+@media (max-width: 767px) { /* Adjust the max-width as needed for your target mobile devices */
+    .btn-mobile-spacing {
+        margin-bottom: 2rem; /* Adjust the value as needed */
+    }
+}

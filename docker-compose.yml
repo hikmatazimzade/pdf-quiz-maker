@@ -1,0 +1,64 @@
+version: "3.8"  
+
+services:
+  django:
+    build: .
+    container_name: pdf_quiz_maker
+    restart: always
+    working_dir: /app/main_project
+    command: gunicorn main_project.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - sqlite_data:/app/main_project/db
+    ports:
+      - "8000:8000"
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 3
+      timeout: 3s
+
+  celery_worker:
+    build: .
+    container_name: celery_worker
+    restart: always
+    working_dir: /app/main_project
+    command: celery -A main_project worker --loglevel=info
+    volumes:
+      - .:/app
+      - sqlite_data:/app/main_project/db
+    depends_on:
+      redis:
+        condition: service_healthy
+      django:
+        condition: service_started
+
+  celery_beat:
+    build: .
+    container_name: celery_beat
+    restart: always
+    working_dir: /app/main_project
+    command: celery -A main_project beat --loglevel=info
+    volumes:
+      - .:/app
+      - sqlite_data:/app/main_project/db
+    depends_on:
+      redis:
+        condition: service_healthy
+      django:
+        condition: service_started
+      celery_worker:
+        condition: service_started
+
+volumes:
+  sqlite_data:
