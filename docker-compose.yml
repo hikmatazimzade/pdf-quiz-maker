@@ -1,4 +1,4 @@
-version: "3.8"  
+version: "3.8"
 
 services:
   django:
@@ -41,23 +41,6 @@ services:
       redis:
         condition: service_healthy
       django:
-        condition: service_started
-
-  celery_beat:
-    build: .
-    container_name: celery_beat
-    restart: always
-    working_dir: /app/main_project
-    command: celery -A main_project beat --loglevel=info
-    volumes:
-      - .:/app
-      - sqlite_data:/app/main_project/db
-    depends_on:
-      redis:
-        condition: service_healthy
-      django:
-        condition: service_started
-      celery_worker:
         condition: service_started
 
 volumes:

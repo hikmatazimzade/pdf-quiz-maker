@@ -1,0 +1,170 @@
+2025-03-05 16:27:07,573 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:27:08,116 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:27:08,125 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:27:08,131 - WARNING - Not Found: /static/img/highlight_image.png
+2025-03-05 16:27:08,137 - WARNING - Not Found: /static/img/quiz_image.png
+2025-03-05 16:27:08,142 - WARNING - Not Found: /static/img/edit_photo.png
+2025-03-05 16:27:08,147 - WARNING - Not Found: /static/img/create_image.png
+2025-03-05 16:27:08,296 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:27:08,454 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:27:08,462 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:27:09,578 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:27:09,585 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:27:09,591 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:27:11,714 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:27:11,720 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:27:11,726 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:27:11,732 - WARNING - Not Found: /static/img/highlight_image.png
+2025-03-05 16:27:12,207 - WARNING - Not Found: /static/img/create_image.png
+2025-03-05 16:27:12,213 - WARNING - Not Found: /static/img/edit_photo.png
+2025-03-05 16:27:12,219 - WARNING - Not Found: /static/img/quiz_image.png
+2025-03-05 16:27:12,489 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:27:12,523 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:27:12,529 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:36:44,333 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:36:44,903 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:36:44,914 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:36:44,925 - WARNING - Not Found: /static/img/highlight_image.png
+2025-03-05 16:36:44,931 - WARNING - Not Found: /static/img/edit_photo.png
+2025-03-05 16:36:44,938 - WARNING - Not Found: /static/img/create_image.png
+2025-03-05 16:36:44,945 - WARNING - Not Found: /static/img/quiz_image.png
+2025-03-05 16:36:45,104 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:36:45,118 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:36:45,745 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:36:45,751 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:36:45,757 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:37:19,305 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:37:19,311 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:37:19,317 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:37:19,324 - WARNING - Not Found: /static/img/highlight_image.png
+2025-03-05 16:37:19,743 - WARNING - Not Found: /static/img/create_image.png
+2025-03-05 16:37:19,752 - WARNING - Not Found: /static/img/edit_photo.png
+2025-03-05 16:37:19,759 - WARNING - Not Found: /static/img/quiz_image.png
+2025-03-05 16:37:19,907 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:37:19,924 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:37:19,929 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:43:45,656 - ERROR - Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/usr/local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+2025-03-05 16:43:45,665 - WARNING - Bad Request: /
+2025-03-05 16:43:50,609 - ERROR - Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/usr/local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+2025-03-05 16:43:50,610 - WARNING - Bad Request: /
+2025-03-05 16:43:51,328 - ERROR - Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/usr/local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+2025-03-05 16:43:51,329 - WARNING - Bad Request: /favicon.ico
+2025-03-05 16:43:51,333 - ERROR - Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/usr/local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+2025-03-05 16:43:51,333 - WARNING - Bad Request: /favicon.ico
+2025-03-05 16:43:54,934 - ERROR - Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/usr/local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+2025-03-05 16:43:54,937 - WARNING - Bad Request: /
+2025-03-05 16:43:55,717 - ERROR - Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/usr/local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+2025-03-05 16:43:55,718 - WARNING - Bad Request: /favicon.ico
+2025-03-05 16:43:55,722 - ERROR - Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/usr/local/lib/python3.10/site-packages/django/utils/deprecation.py", line 128, in __call__
+    response = self.process_request(request)
+  File "/usr/local/lib/python3.10/site-packages/django/middleware/common.py", line 48, in process_request
+    host = request.get_host()
+  File "/usr/local/lib/python3.10/site-packages/django/http/request.py", line 151, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: 'localhost:8000'. You may need to add 'localhost' to ALLOWED_HOSTS.
+2025-03-05 16:43:55,723 - WARNING - Bad Request: /favicon.ico
+2025-03-05 16:55:46,479 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:55:46,485 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:55:46,492 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:55:46,498 - WARNING - Not Found: /static/img/highlight_image.png
+2025-03-05 16:55:46,979 - WARNING - Not Found: /static/img/create_image.png
+2025-03-05 16:55:46,987 - WARNING - Not Found: /static/img/edit_photo.png
+2025-03-05 16:55:46,995 - WARNING - Not Found: /static/img/quiz_image.png
+2025-03-05 16:55:47,173 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:55:47,188 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:55:47,196 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:55:48,073 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:55:48,078 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:55:48,084 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:55:50,449 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 16:55:50,455 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 16:55:50,466 - WARNING - Not Found: /static/css/home.css
+2025-03-05 16:55:50,474 - WARNING - Not Found: /static/img/highlight_image.png
+2025-03-05 16:55:50,924 - WARNING - Not Found: /static/img/create_image.png
+2025-03-05 16:55:50,930 - WARNING - Not Found: /static/img/edit_photo.png
+2025-03-05 16:55:50,936 - WARNING - Not Found: /static/img/quiz_image.png
+2025-03-05 16:55:51,205 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:55:51,245 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 16:55:51,254 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 17:01:53,005 - WARNING - Not Found: /static/css/messages.css
+2025-03-05 17:01:53,613 - WARNING - Not Found: /static/css/navbar.css
+2025-03-05 17:01:53,625 - WARNING - Not Found: /static/css/home.css
+2025-03-05 17:01:53,635 - WARNING - Not Found: /static/img/highlight_image.png
+2025-03-05 17:01:53,641 - WARNING - Not Found: /static/img/create_image.png
+2025-03-05 17:01:53,646 - WARNING - Not Found: /static/img/edit_photo.png
+2025-03-05 17:01:53,651 - WARNING - Not Found: /static/img/quiz_image.png
+2025-03-05 17:01:53,811 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 17:01:53,824 - WARNING - Not Found: /static/img/logo.webp
+2025-03-05 17:12:49,214 - WARNING - Not Found: /favicon.ico
+2025-03-05 17:12:49,221 - WARNING - Not Found: /favicon.ico
+2025-03-05 17:12:57,221 - WARNING - Not Found: /favicon.ico
+2025-03-05 17:13:06,855 - WARNING - Not Found: /favicon.ico
+2025-03-05 17:13:12,631 - WARNING - Not Found: /favicon.ico
+2025-03-05 17:13:16,705 - WARNING - Not Found: /favicon.ico
+2025-03-05 17:13:19,193 - WARNING - Not Found: /favicon.ico
+2025-03-05 17:13:21,689 - WARNING - Not Found: /favicon.ico
+2025-03-05 17:13:23,776 - WARNING - Not Found: /favicon.ico

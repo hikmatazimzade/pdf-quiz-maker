@@ -14,10 +14,8 @@ COPY . .
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Run database migrations and collect static files
+# Set the new working directory in the container
 WORKDIR /app/main_project
-RUN python manage.py collectstatic --noinput
-RUN python manage.py migrate
 
 # Expose the port Django runs on
 EXPOSE 8000
