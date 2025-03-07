@@ -31,18 +31,18 @@ cd pdf-quiz-maker
 docker-compose build
 ```
 
-### 3. Start the Application
-
-```bash
-docker-compose up -d
-```
-
-### 4. Collect Static Files
+### 3. Collect Static Files
 
 After building the containers, run the following command to collect static assets:
 
 ```bash
 docker-compose run django python manage.py collectstatic --noinput
+```
+
+### 4. Start the Application
+
+```bash
+docker-compose up -d
 ```
 
 ### 5. Access the Application
@@ -90,8 +90,6 @@ Contributions are welcome! Please follow these steps to contribute:
 2. Create a new branch for your feature or bug fix.
 3. Make your changes and ensure that tests pass.
 4. Submit a pull request with a detailed description of your changes.
-
-For more details, see our **Contributing Guidelines**.
 
 ## License
 
