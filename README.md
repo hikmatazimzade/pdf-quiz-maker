@@ -5,7 +5,7 @@ PDF Quiz Maker is a fully functional, full-stack web application designed for cr
 ## Features
 
 - **Full-Stack Functionality:** A complete web application covering both front-end and back-end operations.
-- **Built with Django:** The application is developed using the Django web framework.
+- **Built with Django:** The application backed is developed using the Django web framework.
 - **Docker Support:** Easily containerize and deploy the application using Docker.
 - **Redis Integration:** Utilizes Redis for caching and as a message broker.
 - **Celery Task Queue:** Asynchronous task processing powered by Celery.
