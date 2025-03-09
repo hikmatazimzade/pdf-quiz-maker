@@ -51,7 +51,7 @@ Open your browser and navigate to [http://localhost:8000](http://localhost:8000)
 
 ## Usage Instructions
 
-Users need to highlight the correct answers in the PDFs before uploading them. The application extracts questions and answers while recognizing the highlighted option as the correct answer.
+Users need to highlight the correct answers in the PDFs before uploading them, similar to how you would highlight text in Microsoft Edge or other PDF editors. The application extracts questions and answers while recognizing the highlighted option as the correct answer.
 
 For example:
 
